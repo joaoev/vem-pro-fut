@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuHomeLocador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/solar_home_2_linear"
+        android:title="Home" />
+    <item
+        android:id="@+id/menuDashboardLocador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/solar_graph_new_up_linear"
+        android:title="Dashboard" />
+    <item
+        android:id="@+id/menuCamposLocador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/solar_add_square_linear"
+        android:title="Campos" />
+    <item
+        android:id="@+id/menuTransacoesLocador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/solar_transfer_horizontal_linear"
+        android:title="Transferências" />
+    <item
+        android:id="@+id/menuPerfilLocador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/solar_user_outline"
+        android:title="Perfil" />
+</menu>

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameLayoutCadastrarCampo"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastrarCampoFragment">
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="Cadastrar campo"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome do local" />
+
+            <EditText
+                android:id="@+id/editTextCadastrarCampoNomeDoLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="Digite o nome do local"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Endereço" />
+
+            <EditText
+                android:id="@+id/editTextCadastrarCampoEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o endereço"
+                android:layout_marginBottom="16dp"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descrição" />
+
+            <EditText
+                android:id="@+id/editTextCadastrarCampoDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="Digite a descrição do seu local"
+                android:inputType="text" />
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Valor da hora:" />
+
+                <EditText
+                    android:id="@+id/editTextNumberDecimalCadastrarCampoValorDaHora"
+                    android:layout_width="92dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="R$"
+                    android:inputType="numberDecimal" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comodidades" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCadastrarCampoEstacionamento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estacionamento" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCadastrarCampoVestiario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vestiario" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCadastrarCampoBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bar" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:text="Dias da semana e hora" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbSegHorario"
+                        android:layout_width="134dp"
+                        android:layout_height="wrap_content"
+                        android:text="Segunda - " />
+
+                    <EditText
+                        android:hint="Início"
+                        android:id="@+id/etSegInicioHorario"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/etSegFimHorario"
+                        android:hint="Fim"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbTerHorario"
+                        android:layout_width="134dp"
+                        android:layout_height="wrap_content"
+                        android:text="Terça - " />
+
+
+                    <EditText
+                        android:hint="Início"
+                        android:id="@+id/etTerInicioHorario"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/etTerFimHorario"
+                        android:hint="Fim"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbQuaHorario"
+                        android:layout_width="134dp"
+                        android:layout_height="wrap_content"
+                        android:text="Quarta-Feira - " />
+
+
+
+                    <EditText
+                        android:hint="Início"
+                        android:id="@+id/etQuaInicioHorario"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/etQuaFimHorario"
+                        android:hint="Fim"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbQuiHorario"
+                        android:layout_width="134dp"
+                        android:layout_height="wrap_content"
+                        android:text="Quinta-Feira - " />
+
+
+
+                    <EditText
+                        android:hint="Início"
+                        android:id="@+id/etQuiInicioHorario"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/etQuiFimHorario"
+                        android:hint="Fim"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbSexHorario"
+                        android:layout_width="134dp"
+                        android:layout_height="wrap_content"
+                        android:text="Sexta-Feira - " />
+
+
+
+                    <EditText
+                        android:hint="Início"
+                        android:id="@+id/etSexInicioHorario"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/etSexFimHorario"
+                        android:hint="Fim"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbSabHorario"
+                        android:layout_width="134dp"
+                        android:layout_height="wrap_content"
+                        android:text="Sabádo - " />
+
+
+
+                    <EditText
+                        android:hint="Início"
+                        android:id="@+id/etSabInicioHorario"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/etSabFimHorario"
+                        android:hint="Fim"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbDomHorario"
+                        android:layout_width="134dp"
+                        android:layout_height="wrap_content"
+                        android:text="Domingo - " />
+
+
+
+                    <EditText
+                        android:hint="Início"
+                        android:id="@+id/etDomInicioHorario"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/etDomFimHorario"
+                        android:hint="Fim"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/buttonCadastrarCampo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cadastrar campo"
+                android:layout_marginBottom="24dp"
+                />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

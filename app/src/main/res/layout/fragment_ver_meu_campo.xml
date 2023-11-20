@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".VerMeuCampoFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:text="Nome do local" />
+
+            <TextView
+                android:id="@+id/textViewVerMeuCampoLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="${}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:text="Endereço" />
+
+            <TextView
+                android:id="@+id/textViewVerMeuCampoEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="${}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:text="Descrição" />
+
+            <TextView
+                android:id="@+id/textViewVerMeuCampoDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="${}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:text="Preço da locação por hora" />
+
+            <TextView
+                android:id="@+id/textViewVerMeuCampoPrecoHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="${}" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:text="Comodidades" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textViewVerMeuCampoEstacionamento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Estacionamento: ${}  " />
+                <TextView
+                    android:id="@+id/textViewVerMeuCampoVestiario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vestiário: ${}  " />
+                <TextView
+                    android:id="@+id/textViewVerMeuCampoBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bar: ${}" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:text="Dias da semana e hora" />
+
+
+            <TextView
+                android:id="@+id/textViewVerMeuCampoHorarioSeg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+            <TextView
+                android:id="@+id/textViewVerMeuCampoHorarioTer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+            <TextView
+                android:id="@+id/textViewVerMeuCampoHorarioQua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+            <TextView
+                android:id="@+id/textViewVerMeuCampoHorarioQui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+            <TextView
+                android:id="@+id/textViewVerMeuCampoHorarioSex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+            <TextView
+                android:id="@+id/textViewVerMeuCampoHorarioSab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+            <TextView
+                android:id="@+id/textViewVerMeuCampoHorarioDom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <Button
+                android:id="@+id/buttonVerMeuCampoEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar informações" />
+
+
+            <Button
+                android:id="@+id/buttonVerMeuCampoDeletar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Deletar" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
