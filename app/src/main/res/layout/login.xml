@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Login">
+    tools:context=".jogador.Login">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,8 +41,10 @@
             <EditText
                 android:id="@+id/editTextEmailLogin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:background="@drawable/custom_input"
                 android:ems="10"
                 android:hint="Digite seu e-mail"
                 android:inputType="text" />
@@ -63,19 +65,23 @@
             <EditText
                 android:id="@+id/editTextPasswordLogin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:background="@drawable/custom_input"
                 android:ems="10"
                 android:hint="Digite sua senha"
                 android:inputType="textPassword" />
         </LinearLayout>
 
         <Button
-            android:layout_marginTop="16dp"
             android:id="@+id/buttonEntrarLogin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/green"
-            android:text="Entrar" />
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_button"
+            android:text="Entrar"
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -88,7 +94,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/green"
             android:text="Fazer login como locador" />
 
         <TextView
@@ -116,6 +121,18 @@
             android:layout_weight="1"
             android:backgroundTint="@color/green"
             android:text="Criar conta como locador" />
+
+        <Button
+            android:id="@+id/loc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <TextView
+            android:id="@+id/locinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

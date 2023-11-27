@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.vemprofut.jogador.Login
 
 class LoginLocador : AppCompatActivity() {
     private lateinit var editTextLoginEmail: EditText
