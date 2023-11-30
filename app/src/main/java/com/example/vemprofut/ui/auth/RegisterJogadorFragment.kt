@@ -170,7 +170,7 @@ class RegisterJogadorFragment : Fragment() {
         auth.createUserWithEmailAndPassword(email, senha)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    findNavController().navigate(R.id.action_registerLocadorFragment_to_homeLocadorFragment)
+                    findNavController().navigate(R.id.action_global_homeLocadorFragment)
                 } else {
                     binding.progressBarJogador.isVisible = false
                 }

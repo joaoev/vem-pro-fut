@@ -2,12 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name= "android.permission.READ_MEDIA_IMAGES" />
-
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VemProFut"
         tools:targetApi="31">
+        <activity
+            android:name=".MenuJogadorActivity"
+            android:exported="false" />
         <activity
             android:name=".TesteActivity"
             android:exported="false"

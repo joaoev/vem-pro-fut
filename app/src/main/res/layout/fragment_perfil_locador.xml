@@ -3,14 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PerfilLocadorFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.PerfilLocadorFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
         android:orientation="vertical">
+
+
+
+
 
         <TextView
             android:layout_width="match_parent"
@@ -19,75 +30,122 @@
             android:textStyle="bold"
             android:textSize="18dp"
             android:layout_marginBottom="8dp"
-            android:text="Suas Informações" />
+            android:text="Seu Perfil" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgPerfilLocador"
+            android:layout_width="144dp"
+            android:layout_height="144dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"
+            app:shapeAppearanceOverlay="@style/circleImageStyle"
+            android:src="@drawable/add_image" />
 
         <TextView
-            android:id="@+id/textViewPerfilNomeLocador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Seu Nome" />
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="Informações pessoais" />
 
         <TextView
-            android:id="@+id/textViewPerfilEmailLocador"
+            android:id="@+id/txtPerfilLocadorNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="example@gmail.com" />
+            android:text="${nome}" />
+
+
 
         <TextView
-            android:id="@+id/textViewPerfilCidadeLocador"
+            android:id="@+id/txtPerfilLocadorCPF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cidade" />
+            android:text="${cpf}" />
 
         <TextView
-            android:id="@+id/textViewPerfilEstadoLocador"
+            android:id="@+id/txtPerfilLocadorTelefone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estado" />
+            android:text="${telefone}" />
 
         <TextView
-            android:id="@+id/textViewPerfilCNPJCPFLocador"
+            android:id="@+id/txtPerfilLocadorEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CPF/CNPJ" />
+            android:text="${email}" />
 
         <TextView
-            android:id="@+id/textViewPerfilTelefoneLocador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Telefone" />
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="Informações da empresa" />
 
         <TextView
-            android:id="@+id/textViewPerfilNomeLocalLocador"
+            android:id="@+id/txtPerfilLocadorNomeEmpresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nome do local" />
+            android:text="${nome_empresa}" />
+
+        <TextView
+            android:id="@+id/txtPerfilLocadorCNPJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="${cnpj}" />
+
+        <TextView
+            android:id="@+id/txtPerfilLocadorEndereco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="${endereco}" />
+
+        <TextView
+            android:id="@+id/txtPerfilLocadorCidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="${cidade}" />
+
+        <TextView
+            android:id="@+id/txtPerfilLocadorEstado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="${estado}" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:gravity="bottom"
+            android:layout_marginBottom="16dp"
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/buttonPerfilEditarLocador"
+                android:id="@+id/btnPerfilLocadorEditar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_button"
                 android:text="Editar informações" />
 
             <Button
-                android:id="@+id/buttonPerfilExcluirLocador"
+                android:id="@+id/btnPerfilLocadorExcluir"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_button"
                 android:text="Excluir sua conta" />
 
             <Button
-                android:id="@+id/buttonPerfilSairLocador"
+                android:id="@+id/btnPerfilLocadorSair"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_button"
                 android:text="Sair" />
         </LinearLayout>
 
     </LinearLayout>
-
+    </ScrollView>
 </FrameLayout>

@@ -2,16 +2,9 @@ package com.example.vemprofut.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.example.vemprofut.CampoGPSFragment
-import com.example.vemprofut.Home
-import com.example.vemprofut.Jogos
-import com.example.vemprofut.Perfil
 import com.example.vemprofut.R
 import com.example.vemprofut.databinding.ActivityMainBinding
-import com.example.vemprofut.databinding.ActivityTesteBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding

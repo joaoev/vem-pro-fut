@@ -73,7 +73,7 @@ class LoginFragment : Fragment() {
         auth.signInWithEmailAndPassword(email, senha)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    findNavController().navigate(R.id.action_loginFragment_to_homeLocadorFragment)
+                    findNavController().navigate(R.id.action_global_homeLocadorFragment)
                 } else {
                     binding.progressBarLogin.isVisible = false
                 }
