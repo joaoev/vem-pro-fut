@@ -60,7 +60,7 @@ class Home : Fragment() , Adapter.OnItemClickListener {
     override fun onItemClick(campoId: Int, userId: Int) {
         val detalhesCampo = VerCampo.newInstance(campoId, userId)
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, detalhesCampo)
+            .replace(R.id.nav_host_fragment, detalhesCampo)
             .addToBackStack(null)
             .commit()
     }

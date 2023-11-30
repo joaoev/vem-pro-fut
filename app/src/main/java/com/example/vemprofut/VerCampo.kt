@@ -143,7 +143,7 @@ class VerCampo : Fragment() {
         btnAgendar.setOnClickListener() {
             val detalhes = AgendamentoFragment.newInstance(campoId, userID?: -1)
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, detalhes)
+                .replace(R.id.nav_host_fragment, detalhes)
                 .addToBackStack(null)
                 .commit()
         }

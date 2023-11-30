@@ -74,7 +74,7 @@ class PerfilEditarFragment : Fragment() {
                 Toast.makeText(requireContext(), "Alterações salvas com sucesso", Toast.LENGTH_SHORT).show()
                 val detalhes = Perfil.newInstance(userID)
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, detalhes)
+                    .replace(R.id.nav_host_fragment, detalhes)
                     .addToBackStack(null)
                     .commit()
             } else {

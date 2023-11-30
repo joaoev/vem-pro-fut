@@ -10,7 +10,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.vemprofut.jogador.Login
+import com.example.vemprofut.ui.auth.LoginFragment
+
 
 class PerfilLocadorFragment : Fragment() {
 
@@ -102,7 +103,7 @@ class PerfilLocadorFragment : Fragment() {
                 if (sucesso) {
 
                     Toast.makeText(requireContext(), "Conta excluída com sucesso", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireContext(), Login::class.java)
+                    val intent = Intent(requireContext(), LoginFragment::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     requireActivity().finishAffinity()

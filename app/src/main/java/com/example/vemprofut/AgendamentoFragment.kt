@@ -91,7 +91,7 @@ class AgendamentoFragment : Fragment(R.layout.fragment_agendamento) {
                     Toast.makeText(context, "Agendamento Feito", Toast.LENGTH_LONG).show()
                     val detalhes = VerCampo.newInstance(campoId, userID)
                     requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout, detalhes)
+                        .replace(R.id.nav_host_fragment, detalhes)
                         .addToBackStack(null)
                         .commit()
                 } else {

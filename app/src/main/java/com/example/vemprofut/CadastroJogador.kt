@@ -6,7 +6,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.vemprofut.jogador.Login
+import com.example.vemprofut.ui.auth.LoginFragment
+
 
 class CadastroJogador : AppCompatActivity() {
     private lateinit var editTextNome: EditText
@@ -56,7 +57,7 @@ class CadastroJogador : AppCompatActivity() {
 
                 if (saveData != -1L) {
                     Toast.makeText(this, "Conta Criada, Faça Login!", Toast.LENGTH_LONG).show()
-                    val intent = Intent(applicationContext, Login::class.java)
+                    val intent = Intent(applicationContext, LoginFragment::class.java)
                     startActivity(intent)
                 } else {
                     Toast.makeText(this, "Usuário Existe ou Outro Erro!", Toast.LENGTH_LONG).show()

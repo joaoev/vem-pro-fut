@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeLocadorFragment">
+    tools:context=".ui.HomeLocadorFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bem-Vindo, Jogador!"
+                android:text="Bem-Vindo!"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Campos disponíveis"
+                android:text="Seus campos cadastrados"
                 android:textSize="18sp" />
 
         </LinearLayout>

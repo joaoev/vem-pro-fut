@@ -8,7 +8,8 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.vemprofut.jogador.Login
+
+import com.example.vemprofut.ui.auth.LoginFragment
 
 class LoginLocador : AppCompatActivity() {
     private lateinit var editTextLoginEmail: EditText
@@ -58,7 +59,7 @@ class LoginLocador : AppCompatActivity() {
 
 
         btnVoltar.setOnClickListener {
-            val intent = Intent(this, Login::class.java)
+            val intent = Intent(this, LoginFragment::class.java)
             startActivity(intent)
             finish()
         }

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".ui.auth.RegisterLocadorFragment">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Criar conta como Locador">
+
+                </TextView>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:text="@string/logo_da_sua_empresa" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgCadastroLocador"
+                android:layout_width="144dp"
+                android:layout_height="144dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/circleImageStyle"
+                android:src="@drawable/add_image" />
+
+            <TextView
+                android:id="@+id/btnCadastroLocadorImagem"
+                android:layout_width="144dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:linksClickable="true"
+                android:background="@drawable/custom_text_bg"
+                android:textColor="@color/white"
+                android:padding="4dp"
+                android:layout_marginTop="16dp"
+                android:text="Selecionar imagem da galeria" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Nome completo" />
+
+            <EditText
+                android:id="@+id/editTextCadastroLocadorNome"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_input"
+                android:ems="10"
+                android:hint="Digite seu nome completo"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="CPF" />
+
+            <EditText
+                android:id="@+id/editTextCadastroLocadorCPF"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_input"
+                android:ems="10"
+                android:hint="000.000.000-00"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Nome do sua empresa/local" />
+
+            <EditText
+                android:id="@+id/editTextCadastroLocadorNomeEmpresa"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_input"
+                android:ems="10"
+                android:hint="Digite nome da sua empresa/local"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="CNPJ" />
+
+            <EditText
+                android:id="@+id/editTextCadastroLocadorCNPJ"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_input"
+                android:ems="10"
+                android:hint="00.000.000/0000-00"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="E-mail" />
+
+            <EditText
+                android:id="@+id/editTextCadastroLocadorEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_input"
+                android:ems="10"
+                android:hint="Digite seu e-mail"
+                android:inputType="textEmailAddress"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Telefone" />
+
+            <EditText
+                android:id="@+id/editTextCadastroLocadorTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_input"
+                android:ems="10"
+                android:hint="+00 00 9 0000 0000"
+                android:inputType="phone"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Senha" />
+
+            <EditText
+                android:id="@+id/editTextCadastroLocadorSenha"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_input"
+                android:ems="10"
+                android:hint="Crie uma senha"
+                android:inputType="textPassword"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <Button
+                android:id="@+id/buttonCadastroLocador"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_button"
+                android:text="Criar conta" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:indeterminateTint="@color/green"
+                android:visibility="invisible"
+                tools:visibility="visible" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+

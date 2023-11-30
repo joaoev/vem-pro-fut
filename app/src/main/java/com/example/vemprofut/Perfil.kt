@@ -10,7 +10,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.vemprofut.jogador.Login
+
+import com.example.vemprofut.ui.auth.LoginFragment
 
 class Perfil : Fragment() {
 
@@ -70,7 +71,7 @@ class Perfil : Fragment() {
         btnEditar.setOnClickListener() {
             val detalhes = PerfilEditarFragment.newInstance(userID?: -1)
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, detalhes)
+                .replace(R.id.nav_host_fragment, detalhes)
                 .addToBackStack(null)
                 .commit()
         }
@@ -89,7 +90,7 @@ class Perfil : Fragment() {
                 if (sucesso) {
 
                     Toast.makeText(requireContext(), "Conta excluída com sucesso", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireContext(), Login::class.java)
+                    val intent = Intent(requireContext(), LoginFragment::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     requireActivity().finishAffinity()
@@ -116,7 +117,7 @@ class Perfil : Fragment() {
 
 
             builder.setPositiveButton("Sim") { _, _ ->
-                val intent = Intent(requireContext(), Login::class.java)
+                val intent = Intent(requireContext(), LoginFragment::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 requireActivity().finishAffinity()

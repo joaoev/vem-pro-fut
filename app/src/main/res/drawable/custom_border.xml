@@ -1,0 +1,7 @@
+<!-- round_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFFFFF" /> <!-- Cor de fundo do círculo -->
+    <corners android:radius="50dp" /> <!-- Raio da borda (use metade da largura/altura para fazer um círculo) -->
+    <stroke
+        android:width="4dp" /> <!-- Cor da borda -->
+</shape>
