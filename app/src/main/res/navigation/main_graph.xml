@@ -12,41 +12,8 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            app:destination="@id/navigation"
             app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.vemprofut.ui.auth.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_recoverAccountFragment"
-            app:destination="@id/recoverAccountFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_registerLocadorFragment"
-            app:destination="@id/registerLocadorFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_homeLocadorFragment"
-            app:destination="@id/homeLocadorFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
-    <fragment
-        android:id="@+id/recoverAccountFragment"
-        android:name="com.example.vemprofut.ui.auth.RecoverAccountFragment"
-        android:label="fragment_recover_account"
-        tools:layout="@layout/fragment_recover_account" />
-    <fragment
-        android:id="@+id/registerLocadorFragment"
-        android:name="com.example.vemprofut.ui.auth.RegisterLocadorFragment"
-        android:label="fragment_register_locador"
-        tools:layout="@layout/fragment_register_locador" >
-        <action
-            android:id="@+id/action_registerLocadorFragment_to_homeLocadorFragment"
-            app:destination="@id/homeLocadorFragment"
-            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
@@ -54,4 +21,52 @@
         android:name="com.example.vemprofut.ui.HomeLocadorFragment"
         android:label="fragment_home_locador"
         tools:layout="@layout/fragment_home_locador" />
+    <navigation android:id="@+id/navigation"
+        app:startDestination="@id/loginFragment">
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.example.vemprofut.ui.auth.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login">
+            <action
+                android:id="@+id/action_loginFragment_to_recoverAccountFragment"
+                app:destination="@id/recoverAccountFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_registerLocadorFragment"
+                app:destination="@id/registerLocadorFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_homeLocadorFragment"
+                app:destination="@id/homeLocadorFragment"
+                app:popUpTo="@id/loginFragment"
+                app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_loginFragment_to_registerJogadorFragment"
+                app:destination="@id/registerJogadorFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/recoverAccountFragment"
+            android:name="com.example.vemprofut.ui.auth.RecoverAccountFragment"
+            android:label="fragment_recover_account"
+            tools:layout="@layout/fragment_recover_account" />
+        <fragment
+            android:id="@+id/registerLocadorFragment"
+            android:name="com.example.vemprofut.ui.auth.RegisterLocadorFragment"
+            android:label="fragment_register_locador"
+            tools:layout="@layout/fragment_register_locador">
+            <action
+                android:id="@+id/action_registerLocadorFragment_to_homeLocadorFragment"
+                app:destination="@id/homeLocadorFragment"
+                app:popUpTo="@id/loginFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+        <fragment
+            android:id="@+id/registerJogadorFragment"
+            android:name="com.example.vemprofut.ui.auth.RegisterJogadorFragment"
+            android:label="fragment_register_jogador"
+            tools:layout="@layout/fragment_register_jogador">
+            <action
+                android:id="@+id/action_registerJogadorFragment_to_homeLocadorFragment"
+                app:destination="@id/homeLocadorFragment" />
+        </fragment>
+    </navigation>
 </navigation>
