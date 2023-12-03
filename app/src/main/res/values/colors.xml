@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#17c69b</color>
     <color name="red">#FF3B3B</color>
+    <color name="bg_item_bottom_bar">#E1B5FBEA</color>
+    <color name="txt_color_secondary">#E1656565</color>
 </resources>

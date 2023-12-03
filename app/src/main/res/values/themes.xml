@@ -4,11 +4,12 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/green</item>
+        <item name="colorSecondaryContainer">@color/bg_item_bottom_bar</item>
     </style>
 
     <style name="Theme.VemProFut" parent="Base.Theme.VemProFut" />
     <style name="circleImageStyle" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
+        <item name="cornerSize">10dp</item>
     </style>
 </resources>

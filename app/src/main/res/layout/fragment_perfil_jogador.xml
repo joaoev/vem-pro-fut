@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.PerfilJogadorFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBLJogador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Perfil"
+                    android:textSize="18dp"></TextView>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:orientation="vertical"
+                android:paddingTop="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imgPerfilJogador"
+                        android:layout_width="144dp"
+                        android:layout_height="144dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/add_image"
+                        app:shapeAppearanceOverlay="@style/circleImageStyle" />
+
+                    <TextView
+                        android:id="@+id/txtPerfilJogadorNome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="${nome}"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/txtPerfilJogadorNick"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="${nickname}"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:textColor="@color/txt_color_secondary" />
+
+
+                    <TextView
+                        android:id="@+id/txtPerfilJogadorEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="${email}" />
+
+
+                    <TextView
+                        android:id="@+id/txtPerfilJogadorCidade"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="${cidade}" />
+
+                    <TextView
+                        android:id="@+id/txtPerfilJogadorEstado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="${estado}" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="bottom"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btnPerfilJogadorEditar"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@drawable/custom_button"
+                            android:text="Editar informações" />
+
+                        <Button
+                            android:id="@+id/btnPerfilJogadorExcluir"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/custom_button"
+                            android:text="Excluir sua conta" />
+
+                        <Button
+                            android:id="@+id/btnPerfilJogadorSair"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/custom_button"
+                            android:text="Sair" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

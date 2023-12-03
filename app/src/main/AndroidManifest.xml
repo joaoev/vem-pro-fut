@@ -17,14 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VemProFut"
         tools:targetApi="31">
-        <activity
-            android:name=".MenuJogadorActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TesteActivity"
-            android:exported="false"
-            android:label="@string/title_activity_teste"
-            android:theme="@style/Theme.VemProFut" />
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -40,6 +33,14 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="YOUR_API_KEY" />
 
+        <activity
+            android:name=".MenuJogadorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TesteActivity"
+            android:exported="false"
+            android:label="@string/title_activity_teste"
+            android:theme="@style/Theme.VemProFut" />
         <activity
             android:name=".MapsActivity"
             android:exported="false"

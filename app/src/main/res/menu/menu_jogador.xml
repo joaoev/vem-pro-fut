@@ -2,26 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menuHome"
+        android:id="@+id/menuHomeJogador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/solar_home_2_linear"
         android:title="Home" />
     <item
-        android:id="@+id/menuMeusJogos"
+        android:id="@+id/menuPartidaJogador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/solar_football_linear"
         android:title="Partida" />
 
     <item
-        android:id="@+id/menuAlugarQuadra"
+        android:id="@+id/menuMapaCamposJogador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/solar_point_on_map_linear"
         android:title="Campos" />
     <item
-        android:id="@+id/menuPerfil"
+        android:id="@+id/menuPerfilJogador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/solar_user_outline"

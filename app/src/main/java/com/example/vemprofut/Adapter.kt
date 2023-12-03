@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.vemprofut.model.CampoData
 
 class Adapter(private val emplist: ArrayList<CampoData>, private val itemClickListener: Adapter.OnItemClickListener?)
     : RecyclerView.Adapter<Adapter.MyViewHolder>() {
@@ -40,9 +41,7 @@ class Adapter(private val emplist: ArrayList<CampoData>, private val itemClickLi
         holder.precoHora.text = "R$ $precoHora"
         holder.endereco.text = currentEmp.address
 
-        holder.itemView.setOnClickListener {
-            itemClickListener?.onItemClick(currentEmp.id ?: -1, currentEmp.id_locators)
-        }
+
     }
 
 

@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".ui.auth.RegisterJogadorFragment">
+    tools:context=".ui.EditarPerfilJogadorFragment">
 
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayoutJogador"
+        android:id="@+id/appBLJogadorEditarPerfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,16 +18,23 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toobar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Criar conta como Jogador">
+                android:text="Editar dados do seu perfil">
+
+
             </TextView>
         </androidx.appcompat.widget.Toolbar>
+
+
     </com.google.android.material.appbar.AppBarLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -38,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutJogador"
+        app:layout_constraintTop_toBottomOf="@+id/appBLJogadorEditarPerfil"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,12 +56,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:gravity="center_horizontal"
-                android:text="Sua foto" />
+                android:layout_marginBottom="16dp"
+                android:text="Foto do seu perfil" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imgCadastroJogador"
+                android:id="@+id/imgEditarPerfilJogador"
                 android:layout_width="144dp"
                 android:layout_height="144dp"
                 android:layout_gravity="center"
@@ -63,19 +70,19 @@
                 android:src="@drawable/add_image" />
 
             <TextView
-                android:id="@+id/btnCadastroJogadorImagem"
+                android:id="@+id/btnEditarPerfilImagemGaleria"
                 android:layout_width="144dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="16dp"
-                android:linksClickable="true"
-                android:background="@drawable/custom_text_bg"
-                android:textColor="@color/white"
-                android:padding="4dp"
                 android:layout_marginTop="16dp"
-                android:text="Selecionar imagem da galeria" />
+                android:background="@drawable/custom_text_bg"
+                android:gravity="center"
+                android:linksClickable="true"
+                android:padding="4dp"
+                android:text="Atualizar Imagem"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -84,7 +91,7 @@
                 android:text="Nome completo" />
 
             <EditText
-                android:id="@+id/edtCadastroJogadorNome"
+                android:id="@+id/edtEditarPerfilJogadorNome"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/custom_input"
@@ -101,7 +108,7 @@
                 android:text="Nickname" />
 
             <EditText
-                android:id="@+id/edtCadastroJogadorNick"
+                android:id="@+id/edtEditarPerfilJogadorNick"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/custom_input"
@@ -111,50 +118,17 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="E-mail" />
-
-            <EditText
-                android:id="@+id/edtCadastroJogadorEmail"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/custom_input"
-                android:ems="10"
-                android:hint="Digite seu e-mail"
-                android:inputType="textEmailAddress"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Senha" />
-
-            <EditText
-                android:id="@+id/edtCadastroJogadorSenha"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/custom_input"
-                android:ems="10"
-                android:hint="Crie uma senha"
-                android:inputType="textPassword"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp" />
 
             <Button
-                android:id="@+id/btnCadastroJogadorCriarConta"
+                android:id="@+id/btnEditarPerfilJogadorSalvar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/custom_button"
-                android:text="Criar conta" />
+                android:text="Salvar alterações" />
 
             <ProgressBar
-                android:id="@+id/progressBarJogador"
+                android:id="@+id/progressBarEditarPerfilJogador"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -162,6 +136,8 @@
                 android:indeterminateTint="@color/green"
                 android:visibility="invisible"
                 tools:visibility="visible" />
+
+
 
         </LinearLayout>
     </ScrollView>

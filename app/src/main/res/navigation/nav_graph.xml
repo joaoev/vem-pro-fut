@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cadastrarCampoFragment"
-        android:name="com.example.vemprofut.CadastrarCampoFragment"
+        android:name="com.example.vemprofut.ui.CadastrarCampoFragment"
         android:label="fragment_cadastrar_campo"
         tools:layout="@layout/fragment_cadastrar_campo" >
         <action

@@ -60,6 +60,8 @@ class RecoverAccountFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(requireContext(), "Enviamos o link de recuperação para seu e-mail!", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), task.exception?.message ?: "", Toast.LENGTH_SHORT).show()
                 }
 
                 binding.progressBarRecuperar.isVisible = false

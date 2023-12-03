@@ -1,26 +1,19 @@
 package com.example.vemprofut.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.vemprofut.R
-import com.example.vemprofut.databinding.FragmentLoginBinding
-import com.example.vemprofut.databinding.FragmentPerfilBinding
+import com.example.vemprofut.databinding.FragmentPerfilJogadorBinding
 import com.example.vemprofut.databinding.FragmentPerfilLocadorBinding
 import com.example.vemprofut.helper.FirebaseHelper
-import androidx.fragment.app.FragmentManager
-
-import com.example.vemprofut.ui.auth.LoginFragment
 import com.google.firebase.Firebase
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -30,18 +23,16 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 
-class PerfilLocadorFragment : Fragment() {
-
-    private var _binding: FragmentPerfilLocadorBinding? = null
+class PerfilJogadorFragment : Fragment() {
+    private var _binding: FragmentPerfilJogadorBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPerfilLocadorBinding.inflate(inflater, container, false)
+        _binding = FragmentPerfilJogadorBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -49,48 +40,38 @@ class PerfilLocadorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         auth = Firebase.auth
         initClicks()
-        getInfosLocador()
+        getInfosJogador()
     }
 
     private fun initClicks() {
-
-        binding.btnPerfilLocadorEditar.setOnClickListener(){
-            findNavController().navigate(R.id.action_appLocadorFragment_to_editarPerfilLocadorFragment2)
+        binding.btnPerfilJogadorEditar.setOnClickListener(){
+            findNavController().navigate(R.id.action_appJogadorFragment_to_editarPerfilJogadorFragment)
         }
 
-
-        binding.btnPerfilLocadorExcluir.setOnClickListener(){
+        binding.btnPerfilJogadorExcluir.setOnClickListener(){
             showDialogExcluir()
         }
 
-        binding.btnPerfilLocadorSair.setOnClickListener(){
+        binding.btnPerfilJogadorSair.setOnClickListener(){
             showDialogSair()
         }
     }
 
-    private fun getInfosLocador() {
+    private fun getInfosJogador() {
         FirebaseHelper.getDatabase()
-            .child("locador")
+            .child("jogador")
             .child(FirebaseHelper.getIdUser() ?: "erro")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    // Verifique se há dados antes de tentar recuperar
                     if (dataSnapshot.exists()) {
 
-                        if (isAdded) {
-                            binding.txtPerfilLocadorNome.text = dataSnapshot.child("fullname").getValue(String::class.java)
-                            binding.txtPerfilLocadorCPF.text = dataSnapshot.child("cpf").getValue(String::class.java)
-                            binding.txtPerfilLocadorTelefone.text = dataSnapshot.child("phone").getValue(String::class.java)
-                            binding.txtPerfilLocadorEmail.text = dataSnapshot.child("email").getValue(String::class.java)
-                            binding.txtPerfilLocadorNomeEmpresa.text = dataSnapshot.child("companyName").getValue(String::class.java)
-                            binding.txtPerfilLocadorCNPJ.text = dataSnapshot.child("cnpj").getValue(String::class.java)
+                        binding.txtPerfilJogadorNome.text = dataSnapshot.child("fullname").getValue(String::class.java)
+                        binding.txtPerfilJogadorNick.text = "@${dataSnapshot.child("nickname").getValue(String::class.java)}"
+                        binding.txtPerfilJogadorEmail.text = dataSnapshot.child("email").getValue(String::class.java)
 
-                            binding.imgPerfilLocador.load(dataSnapshot.child("urlImage").getValue(String::class.java)){
-                                placeholder(R.drawable.add_image)
-                            }
-
+                        binding.imgPerfilJogador.load(dataSnapshot.child("urlImage").getValue(String::class.java)){
+                            placeholder(R.drawable.add_image)
                         }
-
 
 
                     } else {
@@ -105,22 +86,23 @@ class PerfilLocadorFragment : Fragment() {
                 }
             })
     }
+
     private fun showDialogSair() {
-            val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext())
 
-            builder.setTitle("Confirmação")
-            builder.setMessage("Quer Sair da sua conta?")
+        builder.setTitle("Confirmação")
+        builder.setMessage("Quer Sair da sua conta?")
 
 
-            builder.setPositiveButton("Sim") { _, _ ->
-                logoutApp()
-            }
+        builder.setPositiveButton("Sim") { _, _ ->
+            logoutApp()
+        }
 
-            builder.setNegativeButton("Não") { _, _ ->
-            }
+        builder.setNegativeButton("Não") { _, _ ->
+        }
 
-            val dialog = builder.create()
-            dialog.show()
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun showDialogExcluir() {
@@ -145,7 +127,7 @@ class PerfilLocadorFragment : Fragment() {
         val storage = FirebaseStorage.getInstance()
 
         val storageRef = storage.reference
-        val imageRef = storageRef.child("locador/foto_perfil/foto_perfil_${FirebaseHelper.getIdUser()?:"null"}.jpg")
+        val imageRef = storageRef.child("jogador/foto_perfil/foto_perfil_${FirebaseHelper.getIdUser()?:"null"}.jpg")
 
         imageRef.delete()
             .addOnSuccessListener {
@@ -155,7 +137,7 @@ class PerfilLocadorFragment : Fragment() {
 
                 FirebaseHelper
                     .getDatabase()
-                    .child("locador")
+                    .child("jogador")
                     .child(FirebaseHelper.getIdUser() ?: "erro")
                     .removeValue()
                     .addOnSuccessListener {
@@ -179,7 +161,7 @@ class PerfilLocadorFragment : Fragment() {
                                         user?.delete()
                                             ?.addOnSuccessListener {
                                                 Log.d("FirebaseAuth", "Conta do usuário excluída com sucesso.")
-                                                findNavController().navigate(R.id.action_appLocadorFragment_to_navigation)
+                                                findNavController().navigate(R.id.action_appJogadorFragment_to_navigation)
                                             }
                                             ?.addOnFailureListener { exception ->
 
@@ -213,7 +195,7 @@ class PerfilLocadorFragment : Fragment() {
         var credenciais = ArrayList<String>()
 
         FirebaseHelper.getDatabase()
-            .child("locador")
+            .child("jogador")
             .child(FirebaseHelper.getIdUser() ?: "erro")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -237,14 +219,9 @@ class PerfilLocadorFragment : Fragment() {
 
         return credenciais
     }
-
     private fun logoutApp() {
         auth.signOut()
-        findNavController().navigate(R.id.action_appLocadorFragment_to_navigation)
+        findNavController().navigate(R.id.action_appJogadorFragment_to_navigation)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

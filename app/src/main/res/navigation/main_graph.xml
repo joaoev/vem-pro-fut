@@ -16,8 +16,14 @@
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true"/>
         <action
-            android:id="@+id/action_splashFragment_to_homeLocadorFragment"
-            app:destination="@id/homeLocadorFragment"
+            android:id="@+id/action_splashFragment_to_appJogadorFragment"
+            app:destination="@id/appJogadorFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
+            />
+        <action
+            android:id="@+id/action_splashFragment_to_appLocadorFragment"
+            app:destination="@id/appLocadorFragment"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true"/>
     </fragment>
@@ -54,20 +60,68 @@
             android:label="fragment_register_jogador"
             tools:layout="@layout/fragment_register_jogador"/>
         <action
-            android:id="@+id/action_global_homeLocadorFragment"
-            app:destination="@id/homeLocadorFragment"
+            android:id="@+id/action_global_appJogadorFragment"
+            app:destination="@id/appJogadorFragment"
+            app:popUpTo="@id/navigation"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_global_appLocadorFragment"
+            app:destination="@id/appLocadorFragment"
             app:popUpTo="@id/navigation"
             app:popUpToInclusive="true"/>
     </navigation>
     <fragment
-        android:id="@+id/homeLocadorFragment"
-        android:name="com.example.vemprofut.ui.HomeLocadorFragment"
-        android:label="fragment_home_locador"
-        tools:layout="@layout/fragment_home_locador" >
+        android:id="@+id/appJogadorFragment"
+        android:name="com.example.vemprofut.ui.AppJogadorFragment"
+        android:label="fragment_app_jogador"
+        tools:layout="@layout/fragment_app_jogador" >
         <action
-            android:id="@+id/action_homeLocadorFragment_to_navigation"
+            android:id="@+id/action_appJogadorFragment_to_navigation"
             app:destination="@id/navigation"
-            app:popUpTo="@id/homeLocadorFragment"
+            app:popUpTo="@id/appJogadorFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_appJogadorFragment_to_editarPerfilJogadorFragment"
+            app:destination="@id/editarPerfilJogadorFragment"
+            app:popUpTo="@id/appJogadorFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/appLocadorFragment"
+        android:name="com.example.vemprofut.ui.AppLocadorFragment"
+        android:label="fragment_app_locador"
+        tools:layout="@layout/fragment_app_locador" >
+        <action
+            android:id="@+id/action_appLocadorFragment_to_navigation"
+            app:destination="@id/navigation"
+            app:popUpTo="@id/appLocadorFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_appLocadorFragment_to_editarPerfilLocadorFragment2"
+            app:destination="@id/editarPerfilLocadorFragment2"
+            app:popUpTo="@id/appLocadorFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/editarPerfilLocadorFragment2"
+        android:name="com.example.vemprofut.ui.EditarPerfilLocadorFragment"
+        android:label="fragment_editar_perfil_locador"
+        tools:layout="@layout/fragment_editar_perfil_locador" >
+        <action
+            android:id="@+id/action_editarPerfilLocadorFragment2_to_appLocadorFragment"
+            app:destination="@id/appLocadorFragment"
+            app:popUpTo="@id/editarPerfilLocadorFragment2"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/editarPerfilJogadorFragment"
+        android:name="com.example.vemprofut.ui.EditarPerfilJogadorFragment"
+        android:label="fragment_editar_perfil_jogador"
+        tools:layout="@layout/fragment_editar_perfil_jogador" >
+        <action
+            android:id="@+id/action_editarPerfilJogadorFragment_to_appJogadorFragment"
+            app:destination="@id/appJogadorFragment"
+            app:popUpTo="@id/editarPerfilJogadorFragment"
             app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

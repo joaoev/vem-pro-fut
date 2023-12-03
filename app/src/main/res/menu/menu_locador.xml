@@ -19,11 +19,11 @@
         android:icon="@drawable/solar_add_square_linear"
         android:title="Campos" />
     <item
-        android:id="@+id/menuTransacoesLocador"
+        android:id="@+id/menuAgendamentosLocador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/solar_transfer_horizontal_linear"
-        android:title="Transferências" />
+        android:icon="@drawable/ic_calendar"
+        android:title="Agendamentos" />
     <item
         android:id="@+id/menuPerfilLocador"
         android:layout_width="wrap_content"

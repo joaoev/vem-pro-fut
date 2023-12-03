@@ -23,9 +23,13 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.vemprofut.R
 import com.example.vemprofut.databinding.FragmentRegisterJogadorBinding
+import com.example.vemprofut.helper.FirebaseHelper
+import com.example.vemprofut.model.Jogador
+import com.example.vemprofut.model.Locador
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.storage.FirebaseStorage
 
 
 class RegisterJogadorFragment : Fragment() {
@@ -36,6 +40,10 @@ class RegisterJogadorFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     private lateinit var dialog: AlertDialog
+
+    private lateinit var jogador: Jogador
+
+    private var imageUri: Uri? = null
 
     companion object {
         private val PERMISSAO_GALERIA = Manifest.permission.READ_MEDIA_IMAGES
@@ -74,6 +82,7 @@ class RegisterJogadorFragment : Fragment() {
                 }
 
                 binding.imgCadastroJogador.setImageBitmap(bitmap)
+                imageUri = result.data?.data
             } else {
                 Toast.makeText(requireContext(), "Nenhuma Imagem adicionada", Toast.LENGTH_SHORT).show()
             }
@@ -160,20 +169,95 @@ class RegisterJogadorFragment : Fragment() {
 
             binding.progressBarJogador.isVisible = true
 
-            registerJogador(nome, nick, email, senha, "jogador")
+            registerJogador(nome, nick, email, senha, imageUri)
         } else {
             Toast.makeText(requireContext(), "Nenhum campo pode estar vazio!", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun registerJogador(nome: String, nick: String, email: String, senha: String, tipoConta: String) {
+    private fun registerJogador(nome: String,
+                                nick: String,
+                                email: String,
+                                senha: String,
+                                imageUri: Uri?) {
+
+        jogador = Jogador(
+            fullname = nome,
+            nickname = nick,
+            email = email,
+            password = senha,
+        )
+
+
+
+        val storage = FirebaseStorage.getInstance()
+
+
         auth.createUserWithEmailAndPassword(email, senha)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    findNavController().navigate(R.id.action_global_homeLocadorFragment)
+                    jogador.id = FirebaseHelper.getIdUser() ?: ""
+
+                    val storageRef = storage.reference.child("jogador/foto_perfil/foto_perfil_${jogador.id}.jpg")
+
+                    if (imageUri != null) {
+                        storageRef.putFile(imageUri)
+                            .addOnSuccessListener {
+                                storageRef.downloadUrl.addOnSuccessListener { imageUrlWeb ->
+                                    jogador.urlImage = imageUrlWeb.toString()
+                                    saveUserData(jogador)
+                                }.addOnFailureListener { exception ->
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Erro ao obter a URL da imagem",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    saveUserData(jogador)
+                                }
+                            }
+                            .addOnFailureListener { exception ->
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Erro ao salvar imagem",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                                saveUserData(jogador)
+                            }
+                    }
+
                 } else {
+                    Toast.makeText(requireContext(), task.exception?.message ?: "", Toast.LENGTH_SHORT).show()
                     binding.progressBarJogador.isVisible = false
                 }
+            }
+
+
+    }
+
+    private fun saveUserData(jogador: Jogador) {
+        FirebaseHelper
+            .getDatabase()
+            .child("jogador")
+            .child(jogador.id)
+            .setValue(jogador)
+            .addOnCompleteListener { jogador ->
+                if (jogador.isSuccessful) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Conta criada",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    findNavController().navigate(R.id.action_global_appJogadorFragment)
+                } else {
+                    Toast.makeText(requireContext(), "Erro ao criar 1", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }.addOnFailureListener {
+                binding.progressBarJogador.isVisible = false
+                Toast.makeText(requireContext(),"Erro ao criar 2", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 

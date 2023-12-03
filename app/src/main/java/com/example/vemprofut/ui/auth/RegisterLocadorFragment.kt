@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.Manifest
 import android.app.Activity
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,9 +24,14 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.vemprofut.R
 import com.example.vemprofut.databinding.FragmentRegisterLocadorBinding
+import com.example.vemprofut.helper.FirebaseHelper
+import com.example.vemprofut.model.Locador
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlin.math.log
 
 class RegisterLocadorFragment : Fragment() {
     private var _binding: FragmentRegisterLocadorBinding? = null
@@ -34,6 +40,10 @@ class RegisterLocadorFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     private lateinit var dialog: AlertDialog
+
+    private lateinit var locador: Locador
+
+    private var imageUri: Uri? = null
 
     companion object {
         private val PERMISSAO_GALERIA = Manifest.permission.READ_MEDIA_IMAGES
@@ -68,10 +78,13 @@ class RegisterLocadorFragment : Fragment() {
                         requireContext().contentResolver,
                         result.data?.data!!
                     )
+
                     ImageDecoder.decodeBitmap(source)
+
                 }
 
                 binding.imgCadastroLocador.setImageBitmap(bitmap)
+                imageUri = result.data?.data
             } else {
                 Toast.makeText(requireContext(), "Nenhuma Imagem adicionada", Toast.LENGTH_SHORT).show()
             }
@@ -164,21 +177,107 @@ class RegisterLocadorFragment : Fragment() {
 
             binding.progressBar.isVisible = true
 
-            registerLocador(nome, cpf, nomeEmpresa, cnpj, email, telefone, senha, "locador")
+            registerLocador(nome, cpf, nomeEmpresa, cnpj, email, telefone, senha, imageUri)
 
         } else {
             Toast.makeText(requireContext(), "Nenhum campo pode estar vazio!", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun registerLocador(nome: String, cpf: String, nomeEmpresa: String, cnpj: String, email: String, telefone: String, senha: String, tipoConta: String) {
+    private fun registerLocador(nome: String,
+                                cpf: String,
+                                nomeEmpresa: String,
+                                cnpj: String,
+                                email: String,
+                                telefone: String,
+                                senha: String,
+                                imageUri: Uri?) {
+
+        locador = Locador(
+            fullname = nome,
+            cpf = cpf,
+            companyName = nomeEmpresa,
+            cnpj = cnpj,
+            email = email,
+            phone = telefone,
+            password = senha,
+            )
+
+
+
+        val storage = FirebaseStorage.getInstance()
+
+
         auth.createUserWithEmailAndPassword(email, senha)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    findNavController().navigate(R.id.action_global_homeLocadorFragment)
+                    locador.id = FirebaseHelper.getIdUser() ?: ""
+
+                    val storageRef = storage.reference.child("locador/foto_perfil/foto_perfil_${locador.id}.jpg")
+
+                    if (imageUri != null) {
+                        storageRef.putFile(imageUri)
+                            .addOnSuccessListener {
+                                storageRef.downloadUrl.addOnSuccessListener { imageUrlWeb ->
+//                                    Log.d("IMAGE", "image imageUrlWeb: ${imageUrlWeb} ---- image imageUrlWeb.toStrig(): ${imageUrlWeb.toString()}")
+                                    locador.urlImage = imageUrlWeb.toString()
+
+//                                    Log.d("LOCADOR",    "locador.urlImage: ${locador.urlImage}")
+                                    saveUserData(locador)
+                                }.addOnFailureListener { exception ->
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Erro ao obter a URL da imagem",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    saveUserData(locador)
+                                }
+                            }
+                            .addOnFailureListener { exception ->
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Erro ao salvar imagem",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                                saveUserData(locador)
+                            }
+                    } else {
+                        saveUserData(locador)
+                    }
+
                 } else {
+                    Toast.makeText(requireContext(), task.exception?.message ?: "", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                 }
+            }
+
+
+    }
+
+    private fun saveUserData(locador: Locador) {
+        FirebaseHelper
+            .getDatabase()
+            .child("locador")
+            .child(locador.id)
+            .setValue(locador)
+            .addOnCompleteListener { locador ->
+                if (locador.isSuccessful) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Conta criada",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    findNavController().navigate(R.id.action_global_appLocadorFragment)
+                } else {
+                    Toast.makeText(requireContext(), "Erro ao criar 1", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }.addOnFailureListener {
+                binding.progressBar.isVisible = false
+                Toast.makeText(requireContext(),"Erro ao criar 2", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 
