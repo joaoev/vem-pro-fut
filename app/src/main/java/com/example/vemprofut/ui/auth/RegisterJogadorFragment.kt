@@ -225,7 +225,7 @@ class RegisterJogadorFragment : Fragment() {
                                 saveUserData(jogador)
                             }
                     }
-
+                    saveUserData(jogador)
                 } else {
                     Toast.makeText(requireContext(), task.exception?.message ?: "", Toast.LENGTH_SHORT).show()
                     binding.progressBarJogador.isVisible = false
@@ -243,20 +243,14 @@ class RegisterJogadorFragment : Fragment() {
             .setValue(jogador)
             .addOnCompleteListener { jogador ->
                 if (jogador.isSuccessful) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Conta criada",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
                     findNavController().navigate(R.id.action_global_appJogadorFragment)
                 } else {
-                    Toast.makeText(requireContext(), "Erro ao criar 1", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), "Erro: jogador.isSuccesful == false", Toast.LENGTH_SHORT)
                         .show()
                 }
             }.addOnFailureListener {
                 binding.progressBarJogador.isVisible = false
-                Toast.makeText(requireContext(),"Erro ao criar 2", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(),"Erro: addOnFailureListener", Toast.LENGTH_SHORT)
                     .show()
             }
     }

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.VerCampoJogadorFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBLVerCampoJogador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toobarVerCampoJogador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Detalhes do seu campo">
+
+
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBLVerCampoJogador">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgVerCampoJogador"
+                    android:layout_width="match_parent"
+                    android:layout_height="340dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/add_image_bg_square"
+                    app:shapeAppearanceOverlay="@style/squareImageStyle" />
+
+                <TextView
+                    android:id="@+id/txtVerCampoJogadorNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:text="Nome completo" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/baseline_location_on_24"/>
+
+                    <TextView
+                        android:id="@+id/txtVerCampoJogadorLoc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="Rua Universidade Federal" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:text="Descrição" />
+
+                <TextView
+                    android:id="@+id/txtVerCampoJogadorDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="Descrição do campo." />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:text="Preço da hora" />
+
+                <TextView
+                    android:id="@+id/txtVerCampoJogadorValor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="R$ 100" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:text="Comodidades" />
+
+                <TextView
+                    android:id="@+id/txtVerCampoJogadorCom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="Estacionamento, Bar" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:text="Hora de funcionamento" />
+
+                <TextView
+                    android:id="@+id/txtVerCampoJogadorHora"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="8h - 19h" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:text="Dias da semana" />
+
+                <TextView
+                    android:id="@+id/txtVerCampoJogadorDias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="Seg - Ter - Qua - Qui - Sex - Sáb - Dom" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:text="Agendar um horário" />
+
+                <LinearLayout
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:id="@+id/btnVerCampoJogadorCal"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_calendar_white"
+                        android:background="@drawable/custom_button"/>
+                    <TextView
+                        android:id="@+id/txtVerCampoJogadorData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="8dp"
+                        android:text="dd/mm/yyyy" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="8dp"
+                        android:text="Hora: " />
+
+
+
+                    <EditText
+                        android:hint="Início"
+                        android:id="@+id/edtVerCampoJogadorHora"
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/custom_input"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:ems="10"
+                        android:layout_marginRight="8dp"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="Dia da semana: " />
+                    <TextView
+                        android:id="@+id/txtVerCampoJogadorDiaSemana"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="Segunda" />
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Forma de pagamento"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+                <RadioGroup
+                    android:id="@+id/rbGrupoVerCampoJogador"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:checkedButton="@+id/rbDinheiro">
+                    <RadioButton
+                        android:id="@+id/rbDinheiro"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Dinheiro"/>
+
+                    <RadioButton
+                        android:id="@+id/rbCartao"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Cartão"/>
+                    <RadioButton
+                        android:id="@+id/rbPix"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Pix"/>
+                </RadioGroup>
+
+
+
+
+
+                <Button
+                    android:id="@+id/btnVerCampoJogadorAgendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/custom_button"
+                    android:text="Agendar horário" />
+
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

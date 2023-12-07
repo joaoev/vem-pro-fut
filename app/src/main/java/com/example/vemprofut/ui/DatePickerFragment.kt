@@ -1,4 +1,4 @@
-package com.example.vemprofut
+package com.example.vemprofut.ui
 
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -26,11 +26,18 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
         calendar.set(Calendar.YEAR, year)
         calendar.set(Calendar.MONTH, month)
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        calendar.get(Calendar.DAY_OF_WEEK)
 
-        val selectedDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH).format(calendar.time)
+        // Obtém o dia da semana em português
+        val formatoDiaDaSemana = SimpleDateFormat("EEEE", Locale("pt", "BR"))
+        val diaDaSemana = formatoDiaDaSemana.format(calendar.time)
 
-        val selectedDateBundle = Bundle()
-        selectedDateBundle.putString("SELECTED_DATE", selectedDate)
+        val selectedDate = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(calendar.time)
+
+        val selectedDateBundle = Bundle().apply {
+            putString("SELECTED_DATE", selectedDate)
+            putString("DIA_DA_SEMANA", diaDaSemana)
+        }
 
         setFragmentResult("REQUEST_KEY", selectedDateBundle)
     }

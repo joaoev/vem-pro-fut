@@ -58,8 +58,8 @@
                 android:layout_height="320dp"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/circleImageStyle"
-                android:src="@drawable/add_image" />
+                app:shapeAppearanceOverlay="@style/squareImageStyle"
+                android:src="@drawable/add_image_bg_square" />
 
             <TextView
                 android:id="@+id/btnCadastroCampoImagem"
@@ -172,12 +172,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
-                    android:text="Hora de funcionamento: " />
+                    android:text="Hora (Fomato 24h, 0 - 23): " />
 
 
                 <EditText
                     android:hint="Início"
-                    android:id="@+id/etSegInicioHorario"
+                    android:id="@+id/edtCadastroCampoHoraInicio"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:background="@drawable/custom_input"
@@ -188,7 +188,7 @@
                     android:inputType="number" />
 
                 <EditText
-                    android:id="@+id/etSegFimHorario"
+                    android:id="@+id/edtCadastroCampoHoraFim"
                     android:hint="Fim"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
@@ -264,7 +264,7 @@
 
 
             <Button
-                android:id="@+id/buttonCadastrarCampo"
+                android:id="@+id/btnCadastrarCampo"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"

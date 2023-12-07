@@ -8,14 +8,12 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="10dp">
+    >
 
     <!--TextView for displaying Name -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
         android:background="@color/white"
         android:foreground="?attr/selectableItemBackground"
         app:cardCornerRadius="3dp"
@@ -30,10 +28,13 @@
             android:padding="8dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:id="@+id/imgCardCampo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/add_image_bg_square"
+                />
             <!--TextView for displaying Name -->
 
             <LinearLayout
@@ -49,7 +50,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textViewNomeCampo"
+                        android:id="@+id/txtCardCampoNome"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
@@ -67,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/textViewPrecoHoraCampo"
+                        android:id="@+id/txtCardCampoPrecoHora"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="${preco_hora}"
@@ -93,11 +94,10 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingRight="8dp"
                             android:src="@drawable/baseline_location_on_24" />
 
                         <TextView
-                            android:id="@+id/textViewEnderecoCampo"
+                            android:id="@+id/txtCardCampoEndereco"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"

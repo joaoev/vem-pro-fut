@@ -177,14 +177,15 @@ class EditarPerfilJogadorFragment : Fragment() {
                             binding.edtEditarPerfilJogadorNick.setText( dataSnapshot.child("nickname").getValue(String::class.java))
 
                             binding.imgEditarPerfilJogador.load(dataSnapshot.child("urlImage").getValue(String::class.java)){
-                                placeholder(R.drawable.add_image)
+                                placeholder(R.drawable.add_image_bg)
                             }
                         }
 
 
                     } else {
-                        Toast.makeText(requireContext(), "Jogador: Nenhuma Informação encontrada", Toast.LENGTH_SHORT)
-                            .show()
+                        if (isAdded) {
+                            binding.edtEditarPerfilJogadorNome.setText("Locador: Nenhuma Informação encontrada")
+                        }
                     }
                 }
 
@@ -247,14 +248,62 @@ class EditarPerfilJogadorFragment : Fragment() {
     fun atualizarImagem(imageUri: Uri?) {
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference.child("jogador/foto_perfil/foto_perfil_${FirebaseHelper.getIdUser() ?: "erro"}.jpg")
-        storageRef.delete()
-            .addOnSuccessListener {
-                Toast.makeText(
-                    requireContext(),
-                    "Jogador: Sucesso, Imagem deletada!",
-                    Toast.LENGTH_SHORT
-                ).show()
 
+        storageRef.downloadUrl
+            .addOnSuccessListener { uri ->
+                //deleta a imagem
+                storageRef.delete()
+                    .addOnSuccessListener {
+                        Toast.makeText(
+                            requireContext(),
+                            "Jogador: Sucesso, Imagem deletada!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        if (imageUri != null) {
+                            storageRef.putFile(imageUri)
+                                .addOnSuccessListener {
+                                    storageRef.downloadUrl.addOnSuccessListener { imageUrlWeb ->
+
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Jogador: Sucesso, upload da imagem",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+
+                                        val urlImagem = mapOf(
+                                            "urlImage" to imageUrlWeb.toString()
+                                        )
+
+                                        atualizarUrlImagem(urlImagem)
+
+                                    }.addOnFailureListener { exception ->
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Jogador: Erro ao obter a URL da imagem",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                                .addOnFailureListener { exception ->
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Jogador: Erro ao fazer upload da imagem",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                        }
+
+                    }.addOnFailureListener {
+                        Toast.makeText(
+                            requireContext(),
+                            "Jogador: Falha, Imagem não deletada!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+            }
+            .addOnFailureListener { exception ->
                 if (imageUri != null) {
                     storageRef.putFile(imageUri)
                         .addOnSuccessListener {
@@ -288,14 +337,8 @@ class EditarPerfilJogadorFragment : Fragment() {
                             ).show()
                         }
                 }
-
-            }.addOnFailureListener {
-                Toast.makeText(
-                    requireContext(),
-                    "Jogador: Falha, Imagem não deletada!",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
+
 
 
     }

@@ -65,18 +65,20 @@ class PerfilJogadorFragment : Fragment() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()) {
 
-                        binding.txtPerfilJogadorNome.text = dataSnapshot.child("fullname").getValue(String::class.java)
-                        binding.txtPerfilJogadorNick.text = "@${dataSnapshot.child("nickname").getValue(String::class.java)}"
-                        binding.txtPerfilJogadorEmail.text = dataSnapshot.child("email").getValue(String::class.java)
+                        if (isAdded) {
+                            binding.txtPerfilJogadorNome.text = dataSnapshot.child("fullname").getValue(String::class.java)
+                            binding.txtPerfilJogadorNick.text = "@${dataSnapshot.child("nickname").getValue(String::class.java)}"
+                            binding.txtPerfilJogadorEmail.text = dataSnapshot.child("email").getValue(String::class.java)
 
-                        binding.imgPerfilJogador.load(dataSnapshot.child("urlImage").getValue(String::class.java)){
-                            placeholder(R.drawable.add_image)
+                            binding.imgPerfilJogador.load(dataSnapshot.child("urlImage").getValue(String::class.java)){
+                                placeholder(R.drawable.add_image_bg)
+                            }
                         }
 
-
                     } else {
-                        Toast.makeText(requireContext(), "Nenhum usuário encontrado", Toast.LENGTH_SHORT)
-                            .show()
+                        if (isAdded) {
+                            binding.txtPerfilJogadorNome.text = "Erro ao obter informações do Locador."
+                        }
                     }
                 }
 
@@ -124,15 +126,66 @@ class PerfilJogadorFragment : Fragment() {
     }
 
     private fun deleteAccount() {
+
         val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.reference.child("jogador/foto_perfil/foto_perfil_${FirebaseHelper.getIdUser() ?: "erro"}.jpg")
 
-        val storageRef = storage.reference
-        val imageRef = storageRef.child("jogador/foto_perfil/foto_perfil_${FirebaseHelper.getIdUser()?:"null"}.jpg")
+        storageRef.downloadUrl
+            .addOnSuccessListener { uri ->
+                //deleta a imagem
+                storageRef.delete()
+                    .addOnSuccessListener {
+                        //caso o jogador tenha foto
+                        val credenciais = getEmailAndPassword()
 
-        imageRef.delete()
-            .addOnSuccessListener {
-                Log.d("FirebaseStorage", "Imagem excluída com sucesso.")
+                        FirebaseHelper
+                            .getDatabase()
+                            .child("jogador")
+                            .child(FirebaseHelper.getIdUser() ?: "erro")
+                            .removeValue()
+                            .addOnSuccessListener {
 
+                                Log.d("FirebaseDatabase", "Dados removidos com sucesso.")
+
+                                val user = Firebase.auth.currentUser!!
+
+                                if (user != null) {
+                                    val credential = EmailAuthProvider
+                                        .getCredential(credenciais?.get(0)?: "", credenciais?.get(1)?: "")
+
+                                    user.reauthenticate(credential)
+                                        .addOnCompleteListener { reauthTask ->
+                                            if (reauthTask.isSuccessful) {
+                                                user?.delete()
+                                                    ?.addOnSuccessListener {
+                                                        Log.d("FirebaseAuth", "Conta do usuário excluída com sucesso.")
+                                                        findNavController().navigate(R.id.action_appJogadorFragment_to_navigation)
+                                                    }
+                                                    ?.addOnFailureListener { exception ->
+
+                                                        Log.e("FirebaseAuth", "Erro ao excluir a conta do usuário: $exception")
+                                                    }
+                                            } else {
+
+                                                Log.d("FirebaseAuth", "Falha ao autenticar.")
+                                            }
+                                        }
+                                }
+
+
+
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.e("FirebaseDatabase", "Erro ao remover dados: $exception")
+                            }
+
+                    }.addOnFailureListener {
+                        Log.d("JOGADOR", "Erro ao deletar a imagem.")
+                    }
+
+            }
+            .addOnFailureListener { exception ->
+                //caso o jogador não tenha foto
                 val credenciais = getEmailAndPassword()
 
                 FirebaseHelper
@@ -144,16 +197,11 @@ class PerfilJogadorFragment : Fragment() {
 
                         Log.d("FirebaseDatabase", "Dados removidos com sucesso.")
 
-
-
                         val user = Firebase.auth.currentUser!!
 
                         if (user != null) {
-
-
                             val credential = EmailAuthProvider
                                 .getCredential(credenciais?.get(0)?: "", credenciais?.get(1)?: "")
-
 
                             user.reauthenticate(credential)
                                 .addOnCompleteListener { reauthTask ->
@@ -169,7 +217,7 @@ class PerfilJogadorFragment : Fragment() {
                                             }
                                     } else {
 
-                                        Toast.makeText(requireContext(), "Falha na reautenticação", Toast.LENGTH_SHORT).show()
+                                        Log.d("FirebaseAuth", "Falha ao autenticar.")
                                     }
                                 }
                         }
@@ -181,15 +229,10 @@ class PerfilJogadorFragment : Fragment() {
                         Log.e("FirebaseDatabase", "Erro ao remover dados: $exception")
                     }
 
-
-
-            }
-            .addOnFailureListener { exception ->
-                Log.e("FirebaseStorage", "Erro ao excluir a imagem: $exception")
             }
 
+            }
 
-    }
 
     private fun getEmailAndPassword(): ArrayList<String>? {
         var credenciais = ArrayList<String>()
@@ -206,14 +249,12 @@ class PerfilJogadorFragment : Fragment() {
                         val senha = dataSnapshot.child("password").getValue(String::class.java) ?: ""
                         credenciais.add(senha)
                     } else {
-                        Toast.makeText(requireContext(), "Nenhum usuário encontrado", Toast.LENGTH_SHORT)
-                            .show()
+
                     }
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    Toast.makeText(requireContext(), "FirebaseData, Erro ao obter dados do Firebase", Toast.LENGTH_SHORT)
-                        .show()
+                    Log.d("getEmailAndPassword", "Erro ao obter dados.")
                 }
             })
 
@@ -223,5 +264,8 @@ class PerfilJogadorFragment : Fragment() {
         auth.signOut()
         findNavController().navigate(R.id.action_appJogadorFragment_to_navigation)
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

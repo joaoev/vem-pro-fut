@@ -181,13 +181,14 @@ class EditarPerfilLocadorFragment : Fragment() {
                         binding.edtEditarPerfilLocadorCNPJ.setText( dataSnapshot.child("cnpj").getValue(String::class.java))
 
                         binding.imgEditarPerfilLocador.load(dataSnapshot.child("urlImage").getValue(String::class.java)){
-                            placeholder(R.drawable.add_image)
-                        }}
+                            placeholder(R.drawable.add_image_bg)
+                        } }
 
 
                     } else {
-                        Toast.makeText(requireContext(), "Locador: Nenhuma Informação encontrada", Toast.LENGTH_SHORT)
-                            .show()
+                        if (isAdded) {
+                            binding.edtEditarPerfilLocadorNome.setText("Locador: Nenhuma Informação encontrada")
+                        }
                     }
                 }
 
@@ -269,14 +270,63 @@ class EditarPerfilLocadorFragment : Fragment() {
     fun atualizarImagem(imageUri: Uri?) {
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference.child("locador/foto_perfil/foto_perfil_${FirebaseHelper.getIdUser() ?: "erro"}.jpg")
-        storageRef.delete()
-            .addOnSuccessListener {
-                Toast.makeText(
-                    requireContext(),
-                    "Locador: Sucesso, Imagem deletada!",
-                    Toast.LENGTH_SHORT
-                ).show()
 
+
+        storageRef.downloadUrl
+            .addOnSuccessListener { uri ->
+                //deleta a imagem
+                storageRef.delete()
+                    .addOnSuccessListener {
+                        Toast.makeText(
+                            requireContext(),
+                            "Locador: Sucesso, Imagem deletada!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        if (imageUri != null) {
+                            storageRef.putFile(imageUri)
+                                .addOnSuccessListener {
+                                    storageRef.downloadUrl.addOnSuccessListener { imageUrlWeb ->
+
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Locador: Sucesso, upload da imagem",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+
+                                        val urlImagem = mapOf(
+                                            "urlImage" to imageUrlWeb.toString()
+                                        )
+
+                                        atualizarUrlImagem(urlImagem)
+
+                                    }.addOnFailureListener { exception ->
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Locador: Erro ao obter a URL da imagem",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                                .addOnFailureListener { exception ->
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Locador: Erro ao fazer upload da imagem",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                        }
+
+                    }.addOnFailureListener {
+                        Toast.makeText(
+                            requireContext(),
+                            "Locador: Falha, Imagem não deletada!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+            }
+            .addOnFailureListener { exception ->
                 if (imageUri != null) {
                     storageRef.putFile(imageUri)
                         .addOnSuccessListener {
@@ -291,7 +341,9 @@ class EditarPerfilLocadorFragment : Fragment() {
                                 val urlImagem = mapOf(
                                     "urlImage" to imageUrlWeb.toString()
                                 )
+
                                 atualizarUrlImagem(urlImagem)
+
                             }.addOnFailureListener { exception ->
                                 Toast.makeText(
                                     requireContext(),
@@ -308,13 +360,6 @@ class EditarPerfilLocadorFragment : Fragment() {
                             ).show()
                         }
                 }
-
-            }.addOnFailureListener {
-                Toast.makeText(
-                    requireContext(),
-                    "Locador: Falha, Imagem não deletada!",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
 
 

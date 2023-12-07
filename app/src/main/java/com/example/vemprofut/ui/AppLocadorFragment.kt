@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.vemprofut.DashboardFragment
 import com.example.vemprofut.R
 import com.example.vemprofut.databinding.FragmentAppLocadorBinding
 
@@ -71,7 +70,7 @@ class AppLocadorFragment : Fragment() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+     fun replaceFragment(fragment: Fragment) {
         // Use childFragmentManager para manipular fragments dentro de fragments
         val fragmentManager = childFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()

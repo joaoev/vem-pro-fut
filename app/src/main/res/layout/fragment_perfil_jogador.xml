@@ -53,7 +53,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="16dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/add_image"
+                        android:src="@drawable/add_image_bg"
                         app:shapeAppearanceOverlay="@style/circleImageStyle" />
 
                     <TextView

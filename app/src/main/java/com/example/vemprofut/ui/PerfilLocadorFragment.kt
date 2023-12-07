@@ -1,26 +1,18 @@
 package com.example.vemprofut.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.vemprofut.R
-import com.example.vemprofut.databinding.FragmentLoginBinding
-import com.example.vemprofut.databinding.FragmentPerfilBinding
 import com.example.vemprofut.databinding.FragmentPerfilLocadorBinding
 import com.example.vemprofut.helper.FirebaseHelper
-import androidx.fragment.app.FragmentManager
-
-import com.example.vemprofut.ui.auth.LoginFragment
 import com.google.firebase.Firebase
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -86,7 +78,7 @@ class PerfilLocadorFragment : Fragment() {
                             binding.txtPerfilLocadorCNPJ.text = dataSnapshot.child("cnpj").getValue(String::class.java)
 
                             binding.imgPerfilLocador.load(dataSnapshot.child("urlImage").getValue(String::class.java)){
-                                placeholder(R.drawable.add_image)
+                                placeholder(R.drawable.add_image_bg)
                             }
 
                         }
@@ -94,8 +86,9 @@ class PerfilLocadorFragment : Fragment() {
 
 
                     } else {
-                        Toast.makeText(requireContext(), "Nenhum usuário encontrado", Toast.LENGTH_SHORT)
-                            .show()
+                        if (isAdded) {
+                            binding.txtPerfilLocadorNome.text = "Erro ao obter informações do Locador."
+                        }
                     }
                 }
 
@@ -142,15 +135,66 @@ class PerfilLocadorFragment : Fragment() {
     }
 
     private fun deleteAccount() {
+
         val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.reference.child("locador/foto_perfil/foto_perfil_${FirebaseHelper.getIdUser() ?: "erro"}.jpg")
 
-        val storageRef = storage.reference
-        val imageRef = storageRef.child("locador/foto_perfil/foto_perfil_${FirebaseHelper.getIdUser()?:"null"}.jpg")
+        storageRef.downloadUrl
+            .addOnSuccessListener { uri ->
+                //deleta a imagem
+                storageRef.delete()
+                    .addOnSuccessListener {
+                        //caso o Locador tenha foto
+                        val credenciais = getEmailAndPassword()
 
-        imageRef.delete()
-            .addOnSuccessListener {
-                Log.d("FirebaseStorage", "Imagem excluída com sucesso.")
+                        FirebaseHelper
+                            .getDatabase()
+                            .child("locador")
+                            .child(FirebaseHelper.getIdUser() ?: "erro")
+                            .removeValue()
+                            .addOnSuccessListener {
 
+                                Log.d("FirebaseDatabase", "Dados removidos com sucesso.")
+
+                                val user = Firebase.auth.currentUser!!
+
+                                if (user != null) {
+                                    val credential = EmailAuthProvider
+                                        .getCredential(credenciais?.get(0)?: "", credenciais?.get(1)?: "")
+
+                                    user.reauthenticate(credential)
+                                        .addOnCompleteListener { reauthTask ->
+                                            if (reauthTask.isSuccessful) {
+                                                user?.delete()
+                                                    ?.addOnSuccessListener {
+                                                        Log.d("FirebaseAuth", "Conta do usuário excluída com sucesso.")
+                                                        findNavController().navigate(R.id.action_appLocadorFragment_to_navigation)
+                                                    }
+                                                    ?.addOnFailureListener { exception ->
+
+                                                        Log.e("FirebaseAuth", "Erro ao excluir a conta do usuário: $exception")
+                                                    }
+                                            } else {
+
+                                                Log.d("FirebaseAuth", "Falha ao autenticar.")
+                                            }
+                                        }
+                                }
+
+
+
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.e("FirebaseDatabase", "Erro ao remover dados: $exception")
+                            }
+
+                    }.addOnFailureListener {
+                        Log.d("LOCADOR", "Erro ao deletar a imagem.")
+                    }
+
+            }
+            .addOnFailureListener { exception ->
+                //caso o locador não tenha foto
                 val credenciais = getEmailAndPassword()
 
                 FirebaseHelper
@@ -162,16 +206,11 @@ class PerfilLocadorFragment : Fragment() {
 
                         Log.d("FirebaseDatabase", "Dados removidos com sucesso.")
 
-
-
                         val user = Firebase.auth.currentUser!!
 
                         if (user != null) {
-
-
                             val credential = EmailAuthProvider
                                 .getCredential(credenciais?.get(0)?: "", credenciais?.get(1)?: "")
-
 
                             user.reauthenticate(credential)
                                 .addOnCompleteListener { reauthTask ->
@@ -187,7 +226,7 @@ class PerfilLocadorFragment : Fragment() {
                                             }
                                     } else {
 
-                                        Toast.makeText(requireContext(), "Falha na reautenticação", Toast.LENGTH_SHORT).show()
+                                        Log.d("FirebaseAuth", "Falha ao autenticar.")
                                     }
                                 }
                         }
@@ -199,11 +238,6 @@ class PerfilLocadorFragment : Fragment() {
                         Log.e("FirebaseDatabase", "Erro ao remover dados: $exception")
                     }
 
-
-
-            }
-            .addOnFailureListener { exception ->
-                Log.e("FirebaseStorage", "Erro ao excluir a imagem: $exception")
             }
 
 
@@ -224,14 +258,11 @@ class PerfilLocadorFragment : Fragment() {
                         val senha = dataSnapshot.child("password").getValue(String::class.java) ?: ""
                         credenciais.add(senha)
                     } else {
-                        Toast.makeText(requireContext(), "Nenhum usuário encontrado", Toast.LENGTH_SHORT)
-                            .show()
+
                     }
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    Toast.makeText(requireContext(), "FirebaseData, Erro ao obter dados do Firebase", Toast.LENGTH_SHORT)
-                        .show()
                 }
             })
 

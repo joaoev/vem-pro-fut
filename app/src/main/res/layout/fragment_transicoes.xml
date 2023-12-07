@@ -25,7 +25,7 @@
             android:id="@+id/rvAgendamentos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/card_transacoes"/>
+            tools:listitem="@layout/card_agendamento"/>
     </LinearLayout>
 
 </FrameLayout>

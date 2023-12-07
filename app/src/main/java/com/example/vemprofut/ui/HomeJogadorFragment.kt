@@ -5,56 +5,87 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vemprofut.R
+import com.example.vemprofut.databinding.FragmentHomeJogadorBinding
+import com.example.vemprofut.helper.FirebaseHelper
+import com.example.vemprofut.model.Campo
+import com.example.vemprofut.ui.adpter.AdapterCamposJogador
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.GenericTypeIndicator
+import com.google.firebase.database.ValueEventListener
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeJogadorFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeJogadorFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentHomeJogadorBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_jogador, container, false)
+        _binding = FragmentHomeJogadorBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeJogadorFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeJogadorFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecyclerViewCampos()
+    }
+
+    private fun initRecyclerViewCampos() {
+        if(isAdded) {
+            binding.rvHomeJogador.layoutManager = LinearLayoutManager(context)
+        }
+        var campos = ArrayList<Campo>()
+
+        FirebaseHelper.getDatabase()
+            .child("campos")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (campoDataSnapShot in dataSnapshot.children) {
+                            val campo: Campo? = campoDataSnapShot.getValue(object : GenericTypeIndicator<Campo>() {})
+                            if (campo != null && !campos.contains(campo)) {
+                                    campos.add(campo!!)
+                            }
+                        }
+
+                        if(isAdded) {
+                            binding.rvHomeJogador.adapter = AdapterCamposJogador(campos) { campo_id ->
+
+                                val meuFragment = VerCampoJogadorFragment()
+
+                                val args = Bundle()
+                                args.putString("campo_id", campo_id)
+                                meuFragment.arguments = args
+
+                                val fragmentManager = parentFragmentManager
+
+                                val transaction = fragmentManager.beginTransaction()
+
+                                transaction.replace(R.id.flAppJogador, meuFragment)
+
+                                transaction.commit()
+                            }
+                        }
+                    } else {
+                        if(isAdded) {
+                            binding.txtHomeJogadorC.visibility = View.VISIBLE
+                        }
+                    }
                 }
-            }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                }
+            })
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

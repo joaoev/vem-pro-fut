@@ -63,7 +63,7 @@
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/circleImageStyle"
-                android:src="@drawable/add_image" />
+                android:src="@drawable/add_image_bg" />
 
             <TextView
                 android:id="@+id/btnEditarPerfilImagemGaleria"
