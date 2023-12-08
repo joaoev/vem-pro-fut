@@ -10,6 +10,7 @@ import java.util.Locale
 @Parcelize
 data class Agendamentos(
     var id: String = "",
+    var id_jogador: String = "",
     var id_locador: String= "",
     var id_campo: String = "",
     var nome_campo: String= "",

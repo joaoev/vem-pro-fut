@@ -17,5 +17,8 @@ data class Locador(var id: String = "",
                    var city: String = "",
                    var state: String = "",
                    var tipoConta: String = "locador",
-                   var urlImage: String = "null") : Parcelable {
+                   var urlImage: String = "null",
+    var latitude: Double = 1.0,
+    var longitude: Double = 1.0
+) : Parcelable {
 }

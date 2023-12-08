@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vemprofut.R
 import com.example.vemprofut.databinding.FragmentHomeLocadorBinding
@@ -59,6 +60,31 @@ class SchedulesFragment : Fragment() {
 
                         if(isAdded) {
                             binding.rvAgendamentos.adapter = AdapterAgendamentosLocador(agendamentos) { agendamento_id ->
+
+                                val status = mapOf(
+                                    "foi_aceito" to true
+                                )
+
+                                FirebaseHelper.getDatabase()
+                                    .child("agendamentos")
+                                    .child(FirebaseHelper.getIdUser() ?: "erro")
+                                    .child(agendamento_id)
+                                    .updateChildren(status)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Locador: Status Atualizado!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Locador: Falha ao atualizar status!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
                             }
                         }
                     } else {
@@ -72,6 +98,8 @@ class SchedulesFragment : Fragment() {
                 }
             })
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

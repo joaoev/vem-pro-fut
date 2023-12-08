@@ -35,13 +35,9 @@ class AppJogadorFragment : Fragment() {
                     replaceFragment(homeFragment)
                 }
 
-                R.id.menuPartidaJogador -> {
-                    val partidaFragment = PartidaFragment()
-                    replaceFragment(partidaFragment)
-                }
 
-                R.id.menuMapaCamposJogador -> {
-                    val mapaFragment = MapaCamposFragment()
+                R.id.menuAgendaJogador -> {
+                    val mapaFragment = AgendamentosJogadorFragment()
                     replaceFragment(mapaFragment)
                 }
 

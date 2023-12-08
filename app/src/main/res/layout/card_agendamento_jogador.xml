@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/llMainAgendamentos"
+    android:id="@+id/llMainAgendamentoJogador"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
@@ -54,7 +54,7 @@
                         tools:text="Campo - " />
 
                     <TextView
-                        android:id="@+id/txtAgendamentosNomeCampo"
+                        android:id="@+id/txtAgendamentosNomeCampoJ"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -66,7 +66,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txtAgendamentosValor"
+                    android:id="@+id/txtAgendamentosValorJ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="R$ 100"
@@ -75,59 +75,28 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtAgendamentosData"
+                    android:id="@+id/txtAgendamentosDataJ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Segunda-Feira: 12/12/2023" />
 
 
                 <TextView
-                    android:id="@+id/txtAgendamentosHora"
+                    android:id="@+id/txtAgendamentosHoraJ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="22h - 23h" />
-
                 <TextView
-                    android:id="@+id/txtAgendamentosNomeJogador"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=" @johndoe - John Doe" />
-
-                <TextView
-                    android:id="@+id/txtAgendamentosPagamento"
+                    android:id="@+id/txtAgendamentosPagamentoJ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tipo pagamento: " />
                 <TextView
-                    android:id="@+id/txtAgendamentosStatus"
+                    android:id="@+id/txtAgendamentosStatusJ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Status: " />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="bottom"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-
-                        <Button
-                            android:id="@+id/btnAgendamentosAceitar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/green"
-                            android:layout_weight="1"
-                            android:text="Aceitar" />
-
-                    </LinearLayout>
-                </LinearLayout>
 
             </LinearLayout>
 

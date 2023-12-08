@@ -119,8 +119,15 @@ class EditarPerfilLocadorFragment : Fragment() {
         }
 
         binding.toobar.setNavigationOnClickListener() {
-            val actions = EditarPerfilLocadorFragmentDirections.actionEditarPerfilLocadorFragment2ToAppLocadorFragment()
-            findNavController().navigate(actions)
+            val meuFragment = PerfilLocadorFragment()
+
+            val fragmentManager = parentFragmentManager
+
+            val transaction = fragmentManager.beginTransaction()
+
+            transaction.replace(R.id.flAppLocador, meuFragment)
+
+            transaction.commit()
         }
     }
 
@@ -254,8 +261,15 @@ class EditarPerfilLocadorFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-                val actions = EditarPerfilLocadorFragmentDirections.actionEditarPerfilLocadorFragment2ToAppLocadorFragment()
-                findNavController().navigate(actions)
+                val meuFragment = PerfilLocadorFragment()
+
+                val fragmentManager = parentFragmentManager
+
+                val transaction = fragmentManager.beginTransaction()
+
+                transaction.replace(R.id.flAppLocador, meuFragment)
+
+                transaction.commit()
 
             }
             .addOnFailureListener {

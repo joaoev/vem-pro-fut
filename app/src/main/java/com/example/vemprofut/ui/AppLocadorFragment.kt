@@ -36,11 +36,7 @@ class AppLocadorFragment : Fragment() {
                     replaceFragment(homeFragment)
 
                 }
-                R.id.menuDashboardLocador -> {
 
-                    val dashboardFragment = DashboardFragment()
-                    replaceFragment(dashboardFragment)
-                }
                 R.id.menuCamposLocador -> {
                     val camposFragment = CadastrarCampoFragment()
                     replaceFragment(camposFragment)

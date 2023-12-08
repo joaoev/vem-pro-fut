@@ -1,5 +1,6 @@
 package com.example.vemprofut.ui
 
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -47,7 +48,15 @@ class PerfilLocadorFragment : Fragment() {
     private fun initClicks() {
 
         binding.btnPerfilLocadorEditar.setOnClickListener(){
-            findNavController().navigate(R.id.action_appLocadorFragment_to_editarPerfilLocadorFragment2)
+            val meuFragment = EditarPerfilLocadorFragment()
+
+            val fragmentManager = parentFragmentManager
+
+            val transaction = fragmentManager.beginTransaction()
+
+            transaction.replace(R.id.flAppLocador, meuFragment)
+
+            transaction.commit()
         }
 
 
@@ -58,6 +67,19 @@ class PerfilLocadorFragment : Fragment() {
         binding.btnPerfilLocadorSair.setOnClickListener(){
             showDialogSair()
         }
+
+        binding.btnPerfilLocadorGeo.setOnClickListener(){
+            val meuFragment = SetLocationLocadorFragment()
+
+            val fragmentManager = parentFragmentManager
+
+            val transaction = fragmentManager.beginTransaction()
+
+            transaction.replace(R.id.flAppLocador, meuFragment)
+
+            transaction.commit()
+        }
+
     }
 
     private fun getInfosLocador() {
@@ -76,9 +98,11 @@ class PerfilLocadorFragment : Fragment() {
                             binding.txtPerfilLocadorEmail.text = dataSnapshot.child("email").getValue(String::class.java)
                             binding.txtPerfilLocadorNomeEmpresa.text = dataSnapshot.child("companyName").getValue(String::class.java)
                             binding.txtPerfilLocadorCNPJ.text = dataSnapshot.child("cnpj").getValue(String::class.java)
+                            binding.txtPerfilLocadorEndereco.text = dataSnapshot.child("address").getValue(String::class.java)
 
                             binding.imgPerfilLocador.load(dataSnapshot.child("urlImage").getValue(String::class.java)){
-                                placeholder(R.drawable.add_image_bg)
+                                placeholder(R.drawable.add_image_bg_square)
+                                error(R.drawable.add_image_bg_square)
                             }
 
                         }

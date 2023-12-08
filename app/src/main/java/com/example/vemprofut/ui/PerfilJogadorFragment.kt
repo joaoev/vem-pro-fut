@@ -70,8 +70,9 @@ class PerfilJogadorFragment : Fragment() {
                             binding.txtPerfilJogadorNick.text = "@${dataSnapshot.child("nickname").getValue(String::class.java)}"
                             binding.txtPerfilJogadorEmail.text = dataSnapshot.child("email").getValue(String::class.java)
 
-                            binding.imgPerfilJogador.load(dataSnapshot.child("urlImage").getValue(String::class.java)){
-                                placeholder(R.drawable.add_image_bg)
+                            binding.imgPerfilJogador.load(dataSnapshot.child("urlImage").getValue(String::class.java)) {
+                                placeholder(R.drawable.add_image_bg_square)
+                                error(R.drawable.add_image_bg_square)
                             }
                         }
 

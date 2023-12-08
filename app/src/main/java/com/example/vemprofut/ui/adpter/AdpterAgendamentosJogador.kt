@@ -18,34 +18,30 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 
-class AdapterAgendamentosLocador(
+class AdapterAgendamentosJogador(
     private val agendamentos : ArrayList<Agendamentos>,
-    val campoSelecionado: (String) -> Unit
-): RecyclerView.Adapter<AdapterAgendamentosLocador.MyViewHolder>() {
+): RecyclerView.Adapter<AdapterAgendamentosJogador.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val nomeCampo : TextView = itemView.findViewById(R.id.txtAgendamentosNomeCampo)
-        val valorHora : TextView = itemView.findViewById(R.id.txtAgendamentosValor)
-        val data : TextView = itemView.findViewById(R.id.txtAgendamentosData)
-        val hora : TextView = itemView.findViewById(R.id.txtAgendamentosHora)
-        val nomeJogador : TextView = itemView.findViewById(R.id.txtAgendamentosNomeJogador)
-        val tipoPagamento : TextView = itemView.findViewById(R.id.txtAgendamentosPagamento)
-        val status : TextView = itemView.findViewById(R.id.txtAgendamentosStatus)
-        val btnAceitar : TextView = itemView.findViewById(R.id.btnAgendamentosAceitar)
-
+        val nomeCampo : TextView = itemView.findViewById(R.id.txtAgendamentosNomeCampoJ)
+        val valorHora : TextView = itemView.findViewById(R.id.txtAgendamentosValorJ)
+        val data : TextView = itemView.findViewById(R.id.txtAgendamentosDataJ)
+        val hora : TextView = itemView.findViewById(R.id.txtAgendamentosHoraJ)
+        val tipoPagamento : TextView = itemView.findViewById(R.id.txtAgendamentosPagamentoJ)
+        val status : TextView = itemView.findViewById(R.id.txtAgendamentosStatusJ)
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AdapterAgendamentosLocador.MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_agendamento, parent, false)
+    ): AdapterAgendamentosJogador.MyViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_agendamento_jogador, parent, false)
 
         return MyViewHolder(itemView)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onBindViewHolder(holder: AdapterAgendamentosLocador.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AdapterAgendamentosJogador.MyViewHolder, position: Int) {
         val agendamento = agendamentos[position]
 
         holder.nomeCampo.text = agendamento.nome_campo
@@ -54,10 +50,8 @@ class AdapterAgendamentosLocador(
 
 
         holder.data.text = "Data: ${agendamento.data} - Dia da semana: ${agendamento.dia_semana}"
-        holder.nomeJogador.text = "Quem solicitou: ${agendamento.nome_jogador}"
         holder.hora.text = "Hora: ${agendamento.hora}:00h"
         holder.tipoPagamento.text = "Forma pagamento: ${agendamento.forma_pagamento}"
-
         var status = false
 
         if (agendamento.foi_aceito) {
@@ -70,9 +64,6 @@ class AdapterAgendamentosLocador(
             aceito = "Aceito"
         }
         holder.status.text = "Status: ${aceito}"
-        holder.btnAceitar.setOnClickListener(){
-            campoSelecionado(agendamento.id)
-        }
     }
 
     override fun getItemCount() = agendamentos.size

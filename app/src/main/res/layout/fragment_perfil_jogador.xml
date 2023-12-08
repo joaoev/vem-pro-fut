@@ -53,7 +53,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="16dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/add_image_bg"
+                        android:src="@drawable/add_image_bg_square"
                         app:shapeAppearanceOverlay="@style/circleImageStyle" />
 
                     <TextView
@@ -73,25 +73,31 @@
                         android:textSize="18sp"
                         android:textColor="@color/txt_color_secondary" />
 
-
-                    <TextView
-                        android:id="@+id/txtPerfilJogadorEmail"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="${email}" />
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_marginEnd="16dp"
+                            android:padding="8dp"
+                            android:background="@drawable/custtom_icon_bg"
+                            android:src="@drawable/ic_mail"/>
+
+                        <TextView
+                            android:id="@+id/txtPerfilJogadorEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:text="${email}" />
+                    </LinearLayout>
 
 
-                    <TextView
-                        android:id="@+id/txtPerfilJogadorCidade"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="${cidade}" />
 
-                    <TextView
-                        android:id="@+id/txtPerfilJogadorEstado"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="${estado}" />
 
 
                     <LinearLayout

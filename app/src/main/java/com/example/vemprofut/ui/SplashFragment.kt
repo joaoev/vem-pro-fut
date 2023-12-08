@@ -48,11 +48,11 @@ class SplashFragment : Fragment() {
         } else {
             val userId = FirebaseHelper.getIdUser() ?: "null"
             getTypeAccount(userId) { tipoDeConta ->
-                Toast.makeText(
-                    requireContext(),
-                    "Tipo: ${tipoDeConta} - Id: $userId",
-                    Toast.LENGTH_SHORT
-                ).show()
+//                Toast.makeText(
+//                    requireContext(),
+//                    "Tipo: ${tipoDeConta} - Id: $userId",
+//                    Toast.LENGTH_SHORT
+//                ).show()
                 when (tipoDeConta) {
                     null -> findNavController().navigate(R.id.action_splashFragment_to_navigation)
                     "locador" -> findNavController().navigate(R.id.action_splashFragment_to_appLocadorFragment)
@@ -84,11 +84,11 @@ class SplashFragment : Fragment() {
                                         val userId = dataSnapshot.child("tipoConta").getValue(String::class.java)
                                         callback(userId)
                                     } else {
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "Nenhum dado do usuário encontrado",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
+//                                        Toast.makeText(
+//                                            requireContext(),
+//                                            "Nenhum dado do usuário encontrado",
+//                                            Toast.LENGTH_SHORT
+//                                        ).show()
                                         callback(null)
                                     }
                                 }

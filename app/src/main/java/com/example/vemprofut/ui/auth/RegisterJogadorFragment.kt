@@ -9,6 +9,7 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import androidx.fragment.app.Fragment
@@ -243,7 +244,7 @@ class RegisterJogadorFragment : Fragment() {
             .setValue(jogador)
             .addOnCompleteListener { jogador ->
                 if (jogador.isSuccessful) {
-                    findNavController().navigate(R.id.action_global_appJogadorFragment)
+                        findNavController().navigate(R.id.action_global_appJogadorFragment)
                 } else {
                     Toast.makeText(requireContext(), "Erro: jogador.isSuccesful == false", Toast.LENGTH_SHORT)
                         .show()

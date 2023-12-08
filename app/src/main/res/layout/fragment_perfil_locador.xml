@@ -55,7 +55,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="12dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/add_image_bg"
+                    android:src="@drawable/add_image_bg_square"
                     app:shapeAppearanceOverlay="@style/circleImageStyle" />
 
                 <TextView
@@ -82,25 +82,77 @@
                     android:text="Suas informações"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/txtPerfilLocadorNome"
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="${nome_locador}"
-                     />
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@drawable/custtom_icon_bg"
+                        android:src="@drawable/ic_person_green"/>
 
-                <TextView
-                    android:id="@+id/txtPerfilLocadorCPF"
+                    <TextView
+                        android:id="@+id/txtPerfilLocadorNome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="${nome_locador}"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="${cpf}" />
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txtPerfilLocadorTelefone"
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@drawable/custtom_icon_bg"
+                        android:src="@drawable/ic_cpf"/>
+
+                    <TextView
+                        android:id="@+id/txtPerfilLocadorCPF"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="${cpf}" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="${telefone}" />
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@drawable/custtom_icon_bg"
+                        android:src="@drawable/ic_telefone"/>
+
+                    <TextView
+                        android:id="@+id/txtPerfilLocadorTelefone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="${telefone}" />
+                </LinearLayout>
+
+
+
+
 
 
 
@@ -112,44 +164,77 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-
-                <TextView
-                    android:id="@+id/txtPerfilLocadorCNPJ"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="${cnpj}" />
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txtPerfilLocadorEndereco"
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@drawable/custtom_icon_bg"
+                        android:src="@drawable/ic_empresa"/>
+
+                    <TextView
+                        android:id="@+id/txtPerfilLocadorCNPJ"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="${cnpj}" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="${endereco}" />
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txtPerfilLocadorCidade"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="${cidade}" />
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@drawable/custtom_icon_bg"
+                        android:src="@drawable/ic_location_point"/>
 
-                <TextView
-                    android:id="@+id/txtPerfilLocadorEstado"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="${estado}" />
+                    <TextView
+                        android:id="@+id/txtPerfilLocadorEndereco"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="${endereco}" />
+
+                </LinearLayout>
+
+
+
+
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="24dp"
                     android:gravity="bottom"
                     android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnPerfilLocadorGeo"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/custom_button"
+                        android:text="Selecionar localização" />
 
                     <Button
                         android:id="@+id/btnPerfilLocadorEditar"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="8dp"
                         android:background="@drawable/custom_button"
                         android:text="Editar informações" />
 

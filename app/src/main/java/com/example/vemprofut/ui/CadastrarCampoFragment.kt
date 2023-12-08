@@ -20,10 +20,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import coil.load
 import com.example.vemprofut.R
 import com.example.vemprofut.databinding.FragmentCadastrarCampoBinding
 import com.example.vemprofut.helper.FirebaseHelper
 import com.example.vemprofut.model.Campo
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 
 
@@ -34,6 +38,7 @@ class CadastrarCampoFragment : Fragment() {
     private lateinit var dialog: AlertDialog
 
     private lateinit var campo: Campo
+    private var endereco : String = ""
 
     private var imageUri: Uri? = null
 
@@ -242,52 +247,70 @@ class CadastrarCampoFragment : Fragment() {
                                 listaDiasDaSemana:ArrayList<Boolean>,
                                 imageUri: Uri?) {
 
-        campo = Campo(
-            id_locador = FirebaseHelper.getIdUser() ?: "",
-            local_name = nome,
-            description = descricao,
-            hourly_rate = valorHora,
-            parking = listaComodidades.get(0),
-            locker_room = listaComodidades.get(1),
-            pub = listaComodidades.get(2),
-            time_start = horaInicio,
-            time_end = horaFim,
-            seg = listaDiasDaSemana.get(0),
-            ter = listaDiasDaSemana.get(1),
-            qua = listaDiasDaSemana.get(2),
-            qui = listaDiasDaSemana.get(3),
-            sex = listaDiasDaSemana.get(4),
-            sab = listaDiasDaSemana.get(5),
-            dom = listaDiasDaSemana.get(6)
-        )
+
+        FirebaseHelper.getDatabase()
+            .child("locador")
+            .child(FirebaseHelper.getIdUser() ?: "")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                            endereco = dataSnapshot.child("address").getValue(String::class.java).toString()
+                        campo = Campo(
+                            id_locador = FirebaseHelper.getIdUser() ?: "",
+                            local_name = nome,
+                            description = descricao,
+                            hourly_rate = valorHora,
+                            parking = listaComodidades.get(0),
+                            locker_room = listaComodidades.get(1),
+                            pub = listaComodidades.get(2),
+                            time_start = horaInicio,
+                            time_end = horaFim,
+                            seg = listaDiasDaSemana.get(0),
+                            ter = listaDiasDaSemana.get(1),
+                            qua = listaDiasDaSemana.get(2),
+                            qui = listaDiasDaSemana.get(3),
+                            sex = listaDiasDaSemana.get(4),
+                            sab = listaDiasDaSemana.get(5),
+                            dom = listaDiasDaSemana.get(6),
+                            address = endereco
+                        )
 
 
-        val storage = FirebaseStorage.getInstance()
-        val storageRef = storage.reference.child("locador/imagens_campos/img_campo_${campo.id}.jpg")
+                        val storage = FirebaseStorage.getInstance()
+                        val storageRef = storage.reference.child("campos/imagens_campos/img_campo_${campo.id}.jpg")
 
-        if (imageUri != null) {
-            storageRef.putFile(imageUri)
-                .addOnSuccessListener {
-                    storageRef.downloadUrl.addOnSuccessListener { imageUrlWeb ->
-                        campo.url_image = imageUrlWeb.toString()
-                        saveCampoData(campo)
-                    }.addOnFailureListener { exception ->
-                        Toast.makeText(
-                            requireContext(), "Erro ao obter a URL da imagem", Toast.LENGTH_SHORT).show()
-                        saveCampoData(campo)
+                        if (imageUri != null) {
+                            storageRef.putFile(imageUri)
+                                .addOnSuccessListener {
+                                    storageRef.downloadUrl.addOnSuccessListener { imageUrlWeb ->
+                                        campo.url_image = imageUrlWeb.toString()
+                                        saveCampoData(campo)
+                                    }.addOnFailureListener { exception ->
+                                        Toast.makeText(
+                                            requireContext(), "Erro ao obter a URL da imagem", Toast.LENGTH_SHORT).show()
+                                        saveCampoData(campo)
+                                    }
+                                }
+                                .addOnFailureListener { exception ->
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Erro ao salvar imagem",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    saveCampoData(campo)
+                                }
+                        } else {
+                            saveCampoData(campo)
+                        }
                     }
                 }
-                .addOnFailureListener { exception ->
-                    Toast.makeText(
-                        requireContext(),
-                        "Erro ao salvar imagem",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    saveCampoData(campo)
+
+                override fun onCancelled(databaseError: DatabaseError) {
+
                 }
-        } else {
-            saveCampoData(campo)
-        }
+            })
+
+
     }
 
     private fun saveCampoData(campo: Campo) {
@@ -298,7 +321,6 @@ class CadastrarCampoFragment : Fragment() {
             .setValue(campo)
             .addOnCompleteListener { campo ->
                 if (campo.isSuccessful) {
-                    Toast.makeText(requireContext(), "Sucesso: Campo criado", Toast.LENGTH_SHORT).show()
                     binding.progressBarCadastrarCampo.isVisible = false
 
                     val fragmentManager = parentFragmentManager

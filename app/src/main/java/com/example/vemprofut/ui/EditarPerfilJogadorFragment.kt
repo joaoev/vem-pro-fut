@@ -265,11 +265,6 @@ class EditarPerfilJogadorFragment : Fragment() {
                                 .addOnSuccessListener {
                                     storageRef.downloadUrl.addOnSuccessListener { imageUrlWeb ->
 
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "Jogador: Sucesso, upload da imagem",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
 
                                         val urlImagem = mapOf(
                                             "urlImage" to imageUrlWeb.toString()
@@ -278,28 +273,16 @@ class EditarPerfilJogadorFragment : Fragment() {
                                         atualizarUrlImagem(urlImagem)
 
                                     }.addOnFailureListener { exception ->
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "Jogador: Erro ao obter a URL da imagem",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
+
                                     }
                                 }
                                 .addOnFailureListener { exception ->
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Jogador: Erro ao fazer upload da imagem",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+
                                 }
                         }
 
                     }.addOnFailureListener {
-                        Toast.makeText(
-                            requireContext(),
-                            "Jogador: Falha, Imagem não deletada!",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
                     }
 
             }

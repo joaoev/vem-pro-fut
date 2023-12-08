@@ -7,12 +7,6 @@
         android:icon="@drawable/solar_home_2_linear"
         android:title="Home" />
     <item
-        android:id="@+id/menuDashboardLocador"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@drawable/solar_graph_new_up_linear"
-        android:title="Dashboard" />
-    <item
         android:id="@+id/menuCamposLocador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/ic_calendar"
-        android:title="Agendamentos" />
+        android:title="Agenda" />
     <item
         android:id="@+id/menuPerfilLocador"
         android:layout_width="wrap_content"

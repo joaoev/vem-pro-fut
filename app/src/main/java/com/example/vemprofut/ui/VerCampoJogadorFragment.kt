@@ -157,6 +157,35 @@ class VerCampoJogadorFragment : Fragment() {
                                 error(R.drawable.add_image_bg_square)
                             }
 
+                            FirebaseHelper.getDatabase()
+                                .child("locador")
+                                .child(locador_id ?:"null")
+                                .addValueEventListener(object : ValueEventListener {
+                                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+
+                                            if (isAdded) {
+                                                binding.imgVerCampoJogadorEmpresa.load(dataSnapshot.child("urlImage").getValue(String::class.java)){
+                                                    placeholder(R.drawable.add_image_bg_square)
+                                                    error(R.drawable.add_image_bg_square)
+                                                }
+
+                                                binding.txtVerCampoJogadorEmpresa.text = dataSnapshot.child("companyName").getValue(String::class.java)
+
+                                            }
+
+                                        } else {
+                                            if (isAdded) {
+                                                binding.txtVerCampoJogadorNome.text = "Erro ao obter informações."
+                                            }
+                                        }
+                                    }
+
+                                    override fun onCancelled(databaseError: DatabaseError) {
+
+                                    }
+                                })
+
                         }
 
                     } else {
@@ -270,7 +299,7 @@ class VerCampoJogadorFragment : Fragment() {
                 if(diaSelecionadoEstaIncluso) {
 
                     if (hora.toInt() >= hora_inicio && hora.toInt() <= hora_fim) {
-
+                        getInfosJogador()
                         agendamento = Agendamentos(
                             id_locador = locadorId,
                             id_campo = campoId,
@@ -285,6 +314,7 @@ class VerCampoJogadorFragment : Fragment() {
                             hora = hora.toInt(),
                             nome_jogador = nomeJogador,
                             forma_pagamento = pagamento,
+                            id_jogador = FirebaseHelper.getIdUser() ?: ""
                         )
 
                         data_escolhida = data

@@ -102,6 +102,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="${endereco_campo}"
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
